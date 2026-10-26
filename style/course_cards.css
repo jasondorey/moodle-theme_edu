@@ -1,0 +1,356 @@
+/**
+ * Everon shared course card chrome (block_myoverview + block_recentlyaccessedcourses).
+ * Used by My Courses and Dashboard layouts — dual-scoped to avoid drift.
+ */
+
+/* Shared block roots: Course overview + Recently accessed courses */
+/* stylelint-disable-next-line */
+/* :is() keeps selector lists compact while matching both blocks */
+
+/* -------------------------------------------------------------------------
+ * Card chrome
+ * ------------------------------------------------------------------------- */
+body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card,
+body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 0.85rem;
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
+    container-type: inline-size;
+    container-name: everon-course-card;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+/* Grid cells (Course overview): fill the column. Do NOT apply to the
+ * Recently accessed .card-carousel — that block's JS measures the first
+ * card's outerWidth to decide how many fit; width:100% made one mega-card. */
+body.theme-everon-mycourses .block-myoverview .card-grid .course-card,
+body.theme-everon-dashboard .block-myoverview .card-grid .course-card {
+    width: 100%;
+    margin-inline: 0;
+}
+
+/* Recently accessed carousel: match overview column counts (1→2→3→4).
+ * Neutralize template .mx-1; use the same horizontal gap as the card grids. */
+body.theme-everon-mycourses .block-recentlyaccessedcourses .card-carousel,
+body.theme-everon-dashboard .block-recentlyaccessedcourses .card-carousel {
+    gap: 1.15rem;
+    justify-content: flex-start;
+}
+
+body.theme-everon-mycourses .block-recentlyaccessedcourses .card-carousel .course-card,
+body.theme-everon-dashboard .block-recentlyaccessedcourses .card-carousel .course-card {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 100%;
+    margin-inline: 0;
+}
+
+@media (min-width: 576px) {
+    body.theme-everon-mycourses .block-recentlyaccessedcourses .card-carousel .course-card,
+    body.theme-everon-dashboard .block-recentlyaccessedcourses .card-carousel .course-card {
+        /* 2-up — matches overview sm breakpoint */
+        width: calc((100% - 1.15rem) / 2);
+    }
+}
+
+@media (min-width: 992px) {
+    body.theme-everon-mycourses .block-recentlyaccessedcourses .card-carousel .course-card,
+    body.theme-everon-dashboard .block-recentlyaccessedcourses .card-carousel .course-card {
+        /* 3-up — matches Dashboard overview lg */
+        width: calc((100% - 2.3rem) / 3);
+    }
+}
+
+@media (min-width: 1400px) {
+    body.theme-everon-mycourses .block-recentlyaccessedcourses .card-carousel .course-card,
+    body.theme-everon-dashboard .block-recentlyaccessedcourses .card-carousel .course-card {
+        /* 4-up — matches Dashboard overview xl */
+        width: calc((100% - 3.45rem) / 4);
+    }
+}
+
+body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card:hover,
+body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card:focus-within,
+body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card:hover,
+body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card:focus-within {
+    transform: translateY(-3px);
+    border-color: rgba(15, 23, 42, 0.14);
+    box-shadow: 0 16px 36px rgba(15, 23, 42, 0.1);
+}
+
+body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card > a:first-child,
+body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card > a:first-child {
+    display: block;
+}
+
+body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card .card-img-top,
+body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card .card-img-top {
+    height: auto;
+    aspect-ratio: 16 / 10;
+    border-radius: 0;
+    background-color: #e9eef5;
+}
+
+/* Bootstrap .card-body { flex: 1 1 auto } grows under stretched grid cards,
+ * leaving a tall empty white band under title/category. Dense cards: no grow. */
+body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card .course-info-container,
+body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card .course-info-container {
+    flex: 0 0 auto;
+    /* !important beats core template .pe-1 on course-info-container.
+     * End pad clears the ⋮ (top-right of body, beside title). */
+    padding: 0.55rem 2rem 0.55rem 0.7rem !important;
+}
+
+body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card .course-info-container > .d-flex,
+body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card .course-info-container > .d-flex {
+    min-height: 0;
+    gap: 0;
+}
+
+body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card .course-info-container .text-muted.muted,
+body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card .course-info-container .text-muted.muted {
+    margin: 0;
+}
+
+body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card .coursename,
+body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card .coursename {
+    font-weight: 650;
+    color: #111827;
+    text-decoration: none;
+    margin-bottom: 0.15rem !important;
+    line-height: 1.25;
+}
+
+body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card .coursename .multiline,
+body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card .coursename .multiline {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    white-space: normal;
+    line-height: 1.25;
+}
+
+body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card .categoryname,
+body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card .text-muted,
+body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card .categoryname,
+body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card .text-muted {
+    color: #6b7280 !important;
+    font-size: 0.8125rem;
+    line-height: 1.3;
+}
+
+/* Footer row: collapse in-flow height so it adds no white band.
+ * Children position against .course-card (position:relative): progress on
+ * image, ⋮ on body corner. Do NOT absolute the row itself — that would make
+ * progress's containing block the tiny footer instead of the card. */
+body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card > .d-flex.align-items-start,
+body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card > .d-flex.align-items-start {
+    height: 0;
+    margin: 0;
+    padding: 0;
+    gap: 0;
+    overflow: visible;
+    border: 0;
+    align-items: center !important;
+}
+
+body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card .card-footer,
+body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card .card-footer {
+    background: transparent !important;
+    border: 0 !important;
+    padding: 0 !important;
+}
+
+/* ⋮ beside title (top of body) — avoids empty band under category reserved for a bottom menu */
+body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card .card-footer.menu,
+body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card .card-footer.menu {
+    position: absolute;
+    inset-inline-end: 0.1rem;
+    /* Image is 16/10 of card width; sit just under it */
+    inset-block-start: calc(100cqw * 10 / 16 + 0.2rem);
+    inset-block-end: auto;
+    z-index: 2;
+    margin: 0;
+}
+
+/* Progress footer: lift onto image bottom-right (16/10 aspect image) */
+body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card > .d-flex.align-items-start > .card-footer.w-100:has(.theme-everon-mycourses-progress),
+body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card > .d-flex.align-items-start > .card-footer.w-100:has(.theme-everon-mycourses-progress) {
+    position: absolute;
+    inset-inline-end: 0.5rem;
+    inset-block-start: calc(100cqw * 10 / 16 - 0.5rem - 2.85rem);
+    z-index: 2;
+    width: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    pointer-events: none;
+}
+
+/* -------------------------------------------------------------------------
+ * Favourite star on image (CSS reposition; keep core toggle DOM)
+ * ------------------------------------------------------------------------- */
+body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card [data-region="favourite-icon"],
+body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card [data-region="favourite-icon"] {
+    position: absolute;
+    inset-block-start: 0.55rem;
+    inset-inline-end: 0.55rem;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.85rem;
+    height: 1.85rem;
+    margin: 0;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.88);
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.12);
+    line-height: 1;
+}
+
+body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card [data-region="favourite-icon"] .icon,
+body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card [data-region="favourite-icon"] i,
+body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card [data-region="favourite-icon"] .icon,
+body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card [data-region="favourite-icon"] i {
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card .coursename [data-region="favourite-icon"],
+body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card .coursename [data-region="favourite-icon"] {
+    float: none;
+}
+
+body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card [data-region="favourite-icon"] [data-region="is-favourite"].hidden,
+body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card [data-region="favourite-icon"] [data-region="is-favourite"].hidden {
+    display: none !important;
+}
+
+/* Only show the on-image chip when the course is favourited */
+body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card [data-region="favourite-icon"]:has([data-region="is-favourite"].hidden),
+body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card [data-region="favourite-icon"]:not(:has([data-region="is-favourite"]:not(.hidden))),
+body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card [data-region="favourite-icon"]:has([data-region="is-favourite"].hidden),
+body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card [data-region="favourite-icon"]:not(:has([data-region="is-favourite"]:not(.hidden))) {
+    display: none;
+}
+
+body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card [data-region="favourite-icon"]:has([data-region="is-favourite"]:not(.hidden)),
+body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card [data-region="favourite-icon"]:has([data-region="is-favourite"]:not(.hidden)) {
+    display: inline-flex;
+}
+
+/* -------------------------------------------------------------------------
+ * Circular progress (on-image for cards; compact inline for list/summary)
+ * ------------------------------------------------------------------------- */
+body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .theme-everon-mycourses-progress,
+body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .theme-everon-mycourses-progress {
+    flex: 0 0 auto;
+    min-width: 0;
+    padding: 0;
+}
+
+body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .theme-everon-mycourses-progress__circle,
+body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .theme-everon-mycourses-progress__circle {
+    --everon-progress-angle: calc(var(--everon-progress, 0) * 1%);
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 2.85rem;
+    height: 2.85rem;
+    border-radius: 50%;
+    /* Outer conic ring + opaque dark disc punched via radial layer */
+    background:
+        radial-gradient(
+            closest-side,
+            rgba(15, 23, 42, 0.78) calc(100% - 2.75px),
+            transparent calc(100% - 2.25px)
+        ),
+        conic-gradient(
+            from -90deg,
+            #22a06b 0 var(--everon-progress-angle),
+            rgba(255, 255, 255, 0.28) var(--everon-progress-angle) 100%
+        );
+    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.28);
+    color: #fff;
+}
+
+body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .theme-everon-mycourses-progress__value,
+body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .theme-everon-mycourses-progress__value {
+    position: relative;
+    z-index: 1;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: #fff;
+    user-select: none;
+}
+
+/* List / summary: slightly smaller inline circle (not overlaid) */
+body.theme-everon-mycourses .block-myoverview .list-group-item .theme-everon-mycourses-progress__circle,
+body.theme-everon-mycourses .block-myoverview .course-summaryitem .theme-everon-mycourses-progress__circle,
+body.theme-everon-dashboard .block-myoverview .list-group-item .theme-everon-mycourses-progress__circle,
+body.theme-everon-dashboard .block-myoverview .course-summaryitem .theme-everon-mycourses-progress__circle {
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+/* List / summary views: light polish only */
+body.theme-everon-mycourses .block-myoverview .list-group-item,
+body.theme-everon-mycourses .block-myoverview .course-summaryitem,
+body.theme-everon-dashboard .block-myoverview .list-group-item,
+body.theme-everon-dashboard .block-myoverview .course-summaryitem {
+    border-radius: 0.65rem;
+}
+
+/* -------------------------------------------------------------------------
+ * Accessibility dark mode (Everon a11y toolbar)
+ * ------------------------------------------------------------------------- */
+html.theme-everon-a11y-dark-mode body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card,
+html.theme-everon-a11y-dark-mode body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card {
+    background: #1e222a;
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: none;
+}
+
+html.theme-everon-a11y-dark-mode body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card .coursename,
+html.theme-everon-a11y-dark-mode body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card .coursename {
+    color: #e8eaed;
+}
+
+html.theme-everon-a11y-dark-mode body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card .categoryname,
+html.theme-everon-a11y-dark-mode body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card .text-muted,
+html.theme-everon-a11y-dark-mode body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card .categoryname,
+html.theme-everon-a11y-dark-mode body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card .text-muted {
+    color: #9aa0a6 !important;
+}
+
+html.theme-everon-a11y-dark-mode body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card [data-region="favourite-icon"],
+html.theme-everon-a11y-dark-mode body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card [data-region="favourite-icon"] {
+    background: rgba(30, 34, 42, 0.9);
+}
+
+html.theme-everon-a11y-dark-mode body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .theme-everon-mycourses-progress__circle,
+html.theme-everon-a11y-dark-mode body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .theme-everon-mycourses-progress__circle {
+    background:
+        radial-gradient(
+            closest-side,
+            rgba(0, 0, 0, 0.82) calc(100% - 2.75px),
+            transparent calc(100% - 2.25px)
+        ),
+        conic-gradient(
+            from -90deg,
+            #3dd68c 0 var(--everon-progress-angle),
+            rgba(255, 255, 255, 0.22) var(--everon-progress-angle) 100%
+        );
+}

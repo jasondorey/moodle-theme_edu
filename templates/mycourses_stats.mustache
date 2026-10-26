@@ -1,0 +1,34 @@
+{{!
+    @template theme_everon/mycourses_stats
+
+    Horizontal My Courses statistics strip (current user).
+
+    Context:
+    * arialabel - accessible section label
+    * panels - list of enabled panels
+        * id - panel key
+        * title - panel title
+        * subtext - count subtext
+        * iconclass - Font Awesome classes
+        * hasdivider - true when a vertical divider follows this panel
+}}
+{{#haspanels}}
+<section class="theme-everon-mycourses-stats" aria-label="{{arialabel}}">
+    <div class="theme-everon-mycourses-stats__row">
+        {{#panels}}
+        <div class="theme-everon-mycourses-stats__panel theme-everon-mycourses-stats__panel--{{id}}">
+            <span class="theme-everon-mycourses-stats__icon" aria-hidden="true">
+                <i class="icon {{iconclass}}"></i>
+            </span>
+            <span class="theme-everon-mycourses-stats__body">
+                <span class="theme-everon-mycourses-stats__title">{{title}}</span>
+                <span class="theme-everon-mycourses-stats__subtext">{{subtext}}</span>
+            </span>
+        </div>
+        {{#hasdivider}}
+        <span class="theme-everon-mycourses-stats__divider" aria-hidden="true"></span>
+        {{/hasdivider}}
+        {{/panels}}
+    </div>
+</section>
+{{/haspanels}}

@@ -1,0 +1,55 @@
+{{!
+    @template theme_everon/launch_pad_popover
+
+    Launch Pad — role-aware shortcuts in the navbar utilities (after a11y).
+    Visual layout aligns with the accessibility toolbar tile grid.
+}}
+<div
+    class="popover-region collapsed popover-region-launchpad everon-launchpad"
+    id="nav-launchpad-popover-container"
+    data-region="popover-region-launchpad"
+>
+    <div
+        class="popover-region-toggle nav-link icon-no-margin everon-launchpad__toggle"
+        data-region="popover-region-toggle"
+        role="button"
+        tabindex="0"
+        aria-haspopup="dialog"
+        aria-expanded="false"
+        aria-controls="nav-launchpad-popover-panel"
+        title="{{#str}} launchpadmenu, theme_everon {{/str}}"
+        aria-label="{{#str}} launchpadmenu, theme_everon {{/str}}"
+    >
+        <i class="icon fa fa-location-crosshairs fa-fw" aria-hidden="true"></i>
+    </div>
+    <div
+        id="nav-launchpad-popover-panel"
+        class="popover-region-container everon-launchpad__panel"
+        data-region="popover-region-container"
+        role="dialog"
+        aria-modal="true"
+        aria-hidden="true"
+        aria-label="{{#str}} launchpadmenu, theme_everon {{/str}}"
+        tabindex="-1"
+    >
+        <div class="everon-launchpad__panel-inner">
+            <h3 class="everon-launchpad__title">{{#str}} launchpadmenu, theme_everon {{/str}}</h3>
+            <div class="everon-launchpad__grid" role="list">
+                {{#links}}
+                <a class="everon-launchpad__tile" href="{{{url}}}" role="listitem">
+                    <span class="everon-launchpad__tile-icon" aria-hidden="true">
+                        {{#hasicon}}<i class="fa {{icon}}"></i>{{/hasicon}}
+                        {{^hasicon}}<i class="fa fa-link"></i>{{/hasicon}}
+                    </span>
+                    <span class="everon-launchpad__tile-label">{{label}}</span>
+                </a>
+                {{/links}}
+            </div>
+        </div>
+    </div>
+</div>
+{{#js}}
+require(['theme_everon/launch_pad'], function(LaunchPad) {
+    LaunchPad.init();
+});
+{{/js}}

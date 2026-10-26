@@ -1,0 +1,128 @@
+/**
+ * Profile usermenu — match Accessibility / Launch Pad panel chrome.
+ * Keeps the core vertical link list (no tile grid).
+ */
+
+/* Panel chrome */
+.usermenu #user-action-menu.dropdown-menu,
+#usernavigation .usermenu #user-action-menu.dropdown-menu {
+    --everon-popover-accent: var(--cn-primary, var(--bs-primary, #e67e22));
+    box-sizing: border-box;
+    min-width: 14rem;
+    max-width: min(22.5rem, calc(100vw - 1.5rem));
+    margin-top: 0.45rem !important;
+    padding: 0.4rem 0;
+    border: var(--everon-popover-border, 1px solid color-mix(in srgb, var(--everon-popover-accent) 38%, rgba(63, 68, 78, 0.12)));
+    border-radius: var(--everon-popover-radius, 0.75rem);
+    background: var(--everon-popover-bg, #f3f4f6);
+    background-clip: padding-box;
+    box-shadow: var(
+        --everon-popover-shadow,
+        0 12px 36px color-mix(in srgb, var(--everon-popover-accent) 22%, rgba(63, 68, 78, 0.14)),
+        0 0 0 1px color-mix(in srgb, var(--everon-popover-accent) 10%, transparent)
+    );
+    color: var(--everon-popover-text, #3f444e);
+    font-family: "Noto Sans", "Segoe UI", system-ui, sans-serif;
+    overflow: visible;
+    z-index: 1050;
+}
+
+/* Caret pointing toward the avatar (outer = brand border, inner = panel fill) */
+.usermenu #user-action-menu.dropdown-menu::before,
+.usermenu #user-action-menu.dropdown-menu::after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+}
+
+.usermenu #user-action-menu.dropdown-menu::before {
+    top: -10px;
+    right: 1.05rem;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid color-mix(in srgb, var(--everon-popover-accent) 55%, rgba(63, 68, 78, 0.28));
+    z-index: 1;
+}
+
+.usermenu #user-action-menu.dropdown-menu::after {
+    top: -8px;
+    right: calc(1.05rem + 1px);
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-bottom: 9px solid var(--everon-popover-bg, #f3f4f6);
+    z-index: 2;
+}
+
+/* Vertical list items */
+.usermenu #user-action-menu .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin: 0 0.35rem;
+    padding: 0.55rem 0.85rem;
+    border: 1px solid transparent;
+    border-radius: 0.5rem;
+    background: transparent;
+    color: var(--everon-popover-text, #3f444e);
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.35;
+    text-decoration: none;
+    transition: border-color 0.12s ease, color 0.12s ease, background 0.12s ease;
+}
+
+.usermenu #user-action-menu .dropdown-item .icon,
+.usermenu #user-action-menu .dropdown-item img {
+    flex-shrink: 0;
+}
+
+.usermenu #user-action-menu.dropdown-menu .dropdown-item:hover,
+.usermenu #user-action-menu.dropdown-menu .dropdown-item:focus,
+.usermenu #user-action-menu.dropdown-menu .dropdown-item:focus-visible,
+.usermenu #user-action-menu.dropdown-menu .dropdown-item.active,
+.usermenu #user-action-menu.dropdown-menu .dropdown-item:active {
+    border-color: var(
+        --everon-popover-item-hover-border,
+        color-mix(in srgb, var(--everon-popover-accent) 40%, transparent)
+    ) !important;
+    background: #fff !important;
+    color: var(--everon-popover-accent) !important;
+    outline: none;
+    text-decoration: none;
+    box-shadow: none;
+}
+
+.usermenu #user-action-menu.dropdown-menu .dropdown-item:hover .icon,
+.usermenu #user-action-menu.dropdown-menu .dropdown-item:focus .icon,
+.usermenu #user-action-menu.dropdown-menu .dropdown-item:focus-visible .icon,
+.usermenu #user-action-menu.dropdown-menu .dropdown-item.active .icon {
+    color: var(--everon-popover-accent) !important;
+}
+
+/* Subtle dividers */
+.usermenu #user-action-menu .dropdown-divider {
+    margin: 0.35rem 0.75rem;
+    border-top-color: var(--everon-popover-divider, rgba(63, 68, 78, 0.12));
+    opacity: 1;
+}
+
+/* Carousel / language submenu header inside the same panel */
+.usermenu #user-action-menu #usermenu-carousel {
+    background: transparent;
+}
+
+.usermenu #user-action-menu .carousel-item .header {
+    padding: 0.35rem 0.75rem 0.15rem;
+    color: var(--everon-popover-muted, rgba(63, 68, 78, 0.72));
+    font-size: 0.8125rem;
+    font-weight: 600;
+}
+
+.usermenu #user-action-menu .carousel-item .header .btn-icon:hover,
+.usermenu #user-action-menu .carousel-item .header .btn-icon:focus {
+    color: var(--everon-popover-accent);
+}

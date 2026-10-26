@@ -1,0 +1,92 @@
+/**
+ * Everon Dashboard supporting surfaces — unify blocks with course-card language.
+ * Loaded with Dashboard layout (enabledashboardlayout). Body: theme-everon-dashboard.
+ * Tokens align with course_cards.css / popover_chrome.css.
+ */
+
+body.theme-everon-dashboard {
+    --everon-surface-bg: #ffffff;
+    --everon-surface-radius: 0.85rem;
+    --everon-surface-border: 1px solid rgba(15, 23, 42, 0.08);
+    --everon-surface-shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
+    --everon-surface-title: #1f2328;
+    --everon-surface-muted: #6b7280;
+}
+
+/* Soft card surfaces for dashboard blocks (not course-cards themselves) */
+body.theme-everon-dashboard #region-main .block.card,
+body.theme-everon-dashboard #theme-block-region-outside-right .block.card,
+body.theme-everon-dashboard #theme-block-region-outside-left .block.card {
+    background: var(--everon-surface-bg);
+    border: var(--everon-surface-border) !important;
+    border-radius: var(--everon-surface-radius) !important;
+    box-shadow: var(--everon-surface-shadow);
+    overflow: hidden;
+}
+
+body.theme-everon-dashboard #region-main .block .card-title,
+body.theme-everon-dashboard #theme-block-region-outside-right .block .card-title,
+body.theme-everon-dashboard #theme-block-region-outside-left .block .card-title {
+    color: var(--everon-surface-title);
+    font-weight: 600;
+    font-size: 1.05rem;
+}
+
+body.theme-everon-dashboard #region-main .block .card-body,
+body.theme-everon-dashboard #theme-block-region-outside-right .block .card-body,
+body.theme-everon-dashboard #theme-block-region-outside-left .block .card-body {
+    padding: 1rem 1.15rem 1.1rem;
+}
+
+/* Timeline toolbar — slightly tighter */
+body.theme-everon-dashboard .block_timeline .block-timeline .d-flex.flex-wrap {
+    gap: 0.35rem !important;
+    margin-bottom: 0.35rem;
+}
+
+body.theme-everon-dashboard .block_timeline .btn.btn-outline-secondary {
+    --bs-btn-padding-y: 0.3rem;
+    --bs-btn-padding-x: 0.65rem;
+    --bs-btn-font-size: 0.85rem;
+}
+
+body.theme-everon-dashboard .block_timeline .form-control {
+    min-height: calc(1.5em + 0.6rem + 2px);
+    padding-block: 0.3rem;
+    font-size: 0.875rem;
+}
+
+/* Empty states — calmer, less “admin tool” */
+body.theme-everon-dashboard .block_timeline [data-region="event-list-content"] .text-center,
+body.theme-everon-dashboard .block_timeline .text-center:has(.text-muted),
+body.theme-everon-dashboard .block_calendar_upcoming .content .text-center,
+body.theme-everon-dashboard .block_calendar_upcoming .card-text > .emptystate,
+body.theme-everon-dashboard .block_timeline .text-muted {
+    color: var(--everon-surface-muted) !important;
+}
+
+body.theme-everon-dashboard .block_timeline .text-center .icon,
+body.theme-everon-dashboard .block_timeline .text-center i.icon,
+body.theme-everon-dashboard .block_timeline .text-center .fa,
+body.theme-everon-dashboard .block_calendar_upcoming .content .icon {
+    opacity: 0.45;
+    font-size: 1.75rem !important;
+    width: 1.75rem;
+    height: 1.75rem;
+}
+
+body.theme-everon-dashboard .block_timeline .text-center p,
+body.theme-everon-dashboard .block_calendar_upcoming .content p {
+    font-size: 0.9rem;
+    margin-top: 0.35rem !important;
+}
+
+/* Soften calendar chrome to match */
+body.theme-everon-dashboard .block_calendar_month .calendartable th,
+body.theme-everon-dashboard .block_calendar_month .calendartable td {
+    border-color: rgba(15, 23, 42, 0.06);
+}
+
+body.theme-everon-dashboard .block_calendar_month .card-text a {
+    font-size: 0.85rem;
+}

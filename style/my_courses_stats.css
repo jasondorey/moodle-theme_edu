@@ -1,0 +1,130 @@
+/*
+ * Everon My Courses statistics strip.
+ * Loaded only when enablemycoursesstats is Yes and pagelayout is mycourses.
+ * Keep separate from my_courses.css / course_cards.css.
+ */
+
+body.theme-everon-mycourses-stats .theme-everon-mycourses-stats {
+    --theme-everon-stats-title: #1f2328;
+    --theme-everon-stats-sub: #6b7280;
+    --theme-everon-stats-icon: #4b5563;
+    --theme-everon-stats-divider: rgba(15, 23, 42, 0.12);
+    --theme-everon-stats-bg: #ffffff;
+    margin: 0.25rem 0 1.25rem;
+    padding: 0.75rem 0.25rem 1rem;
+    background: var(--theme-everon-stats-bg);
+}
+
+body.theme-everon-mycourses-stats .theme-everon-mycourses-stats__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0;
+    width: 100%;
+}
+
+body.theme-everon-mycourses-stats .theme-everon-mycourses-stats__panel {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.85rem;
+    flex: 1 1 12rem;
+    min-width: 10rem;
+    padding: 0.65rem 1.25rem;
+}
+
+body.theme-everon-mycourses-stats .theme-everon-mycourses-stats__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 2.25rem;
+    height: 2.25rem;
+    color: var(--theme-everon-stats-icon);
+}
+
+body.theme-everon-mycourses-stats .theme-everon-mycourses-stats__icon .icon,
+body.theme-everon-mycourses-stats .theme-everon-mycourses-stats__icon i {
+    margin: 0 !important;
+    font-size: 1.65rem !important;
+    width: 1.65rem;
+    height: 1.65rem;
+    line-height: 1;
+    color: inherit;
+}
+
+body.theme-everon-mycourses-stats .theme-everon-mycourses-stats__body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0.15rem;
+    min-width: 0;
+}
+
+body.theme-everon-mycourses-stats .theme-everon-mycourses-stats__title {
+    font-family: inherit;
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--theme-everon-stats-title);
+}
+
+body.theme-everon-mycourses-stats .theme-everon-mycourses-stats__subtext {
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.3;
+    color: var(--theme-everon-stats-sub);
+}
+
+body.theme-everon-mycourses-stats .theme-everon-mycourses-stats__divider {
+    display: block;
+    align-self: stretch;
+    width: 0;
+    margin-block: 0.35rem;
+    border-inline-start: 1px solid var(--theme-everon-stats-divider);
+    flex: 0 0 auto;
+}
+
+@media (max-width: 991.98px) {
+    body.theme-everon-mycourses-stats .theme-everon-mycourses-stats__panel {
+        flex: 1 1 calc(50% - 1px);
+        min-width: 9rem;
+    }
+
+    body.theme-everon-mycourses-stats .theme-everon-mycourses-stats__divider {
+        display: none;
+    }
+}
+
+@media (max-width: 575.98px) {
+    body.theme-everon-mycourses-stats .theme-everon-mycourses-stats {
+        padding: 0.5rem 0;
+        margin-bottom: 1rem;
+    }
+
+    body.theme-everon-mycourses-stats .theme-everon-mycourses-stats__row {
+        flex-direction: column;
+    }
+
+    body.theme-everon-mycourses-stats .theme-everon-mycourses-stats__panel {
+        flex: 1 1 auto;
+        width: 100%;
+        padding: 0.75rem 0.5rem;
+        border-block-end: 1px solid var(--theme-everon-stats-divider);
+    }
+
+    body.theme-everon-mycourses-stats .theme-everon-mycourses-stats__panel:last-child {
+        border-block-end: 0;
+    }
+}
+
+html.theme-everon-a11y-dark-mode body.theme-everon-mycourses-stats .theme-everon-mycourses-stats {
+    --theme-everon-stats-title: #e8eaed;
+    --theme-everon-stats-sub: #9aa0a6;
+    --theme-everon-stats-icon: #c4c7cc;
+    --theme-everon-stats-divider: rgba(232, 234, 237, 0.16);
+    --theme-everon-stats-bg: transparent;
+}

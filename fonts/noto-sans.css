@@ -1,0 +1,42 @@
+/**
+ * Noto Sans — site default sans (OFL). Loaded directly so @font-face URLs resolve.
+ *
+ * Source: The Noto Project Authors / Fontsource (latin subset).
+ * SIL Open Font License 1.1 (see NotoSans-OFL.txt). Static WOFF2 for weights 400/500/600/700.
+ *
+ * @package    theme_everon
+ * @copyright  2026 Project Theme / Jason Dorey
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+@font-face {
+    font-family: "Noto Sans";
+    src: url("NotoSans-400.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Noto Sans";
+    src: url("NotoSans-500.woff2") format("woff2");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Noto Sans";
+    src: url("NotoSans-600.woff2") format("woff2");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Noto Sans";
+    src: url("NotoSans-700.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}

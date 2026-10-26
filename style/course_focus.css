@@ -1,0 +1,195 @@
+/**
+ * Everon Focus Mode — wide content, hidden course tabs / drawers.
+ * Ported from theme_custom (trimmed: no custom page-header chrome).
+ */
+
+/* —— Fixed footer float stack (Union buttons + Focus FAB + help) ——
+ * Visual order bottom→top: help ? → Focus → #back-to-top (when scrolled).
+ * Absorbs Boost Union #boost-union-footer-buttons so it no longer fights Focus
+ * at the same fixed bottom: 5rem band.
+ */
+.footer-popover [data-region="footer-container-popover"].theme-everon-footer-floats {
+    position: fixed;
+    right: 2rem;
+    bottom: 2rem;
+    z-index: 1055;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: visible;
+    gap: 0.75rem;
+    pointer-events: none;
+    width: auto;
+    height: auto;
+}
+
+.footer-popover [data-region="footer-container-popover"].theme-everon-footer-floats > .btn-footer-popover,
+.footer-popover [data-region="footer-container-popover"].theme-everon-footer-floats > .btn-footer-communication,
+.footer-popover [data-region="footer-container-popover"].theme-everon-footer-floats > .btn-footer-everon-focus {
+    position: static !important;
+    right: auto !important;
+    bottom: auto !important;
+    margin: 0;
+    pointer-events: auto;
+    flex-shrink: 0;
+    display: inline-flex !important;
+}
+
+/* Fold Union’s fixed footer-buttons into the same flex column. */
+.footer-popover [data-region="footer-container-popover"].theme-everon-footer-floats > #boost-union-footer-buttons {
+    position: static !important;
+    right: auto !important;
+    bottom: auto !important;
+    margin: 0;
+    padding: 0;
+    pointer-events: none;
+    flex-shrink: 0;
+    z-index: auto;
+    transition: none;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    width: auto;
+    height: auto;
+}
+
+.footer-popover [data-region="footer-container-popover"].theme-everon-footer-floats
+    > #boost-union-footer-buttons.theme-everon-union-footer-buttons--visible {
+    display: flex !important;
+    pointer-events: auto;
+}
+
+.footer-popover [data-region="footer-container-popover"].theme-everon-footer-floats > #boost-union-footer-buttons .btn {
+    margin-top: 0 !important;
+    pointer-events: auto;
+    flex-shrink: 0;
+}
+
+/* Flex order: Union (back-to-top) → Focus → communication → help (?) */
+.footer-popover [data-region="footer-container-popover"].theme-everon-footer-floats > #boost-union-footer-buttons {
+    order: 1;
+}
+
+.footer-popover [data-region="footer-container-popover"].theme-everon-footer-floats > .btn-footer-everon-focus {
+    order: 2;
+}
+
+.footer-popover [data-region="footer-container-popover"].theme-everon-footer-floats > .btn-footer-communication {
+    order: 3;
+}
+
+.footer-popover [data-region="footer-container-popover"].theme-everon-footer-floats > .btn-footer-popover {
+    order: 4;
+}
+
+.hasstickyfooter [data-region="footer-container-popover"].theme-everon-footer-floats {
+    bottom: calc(1rem + max(80px, 3rem));
+}
+
+@media (min-width: 992px) {
+    #page.drawers.show-drawer-right .theme-everon-footer-floats {
+        right: calc(320px + 2rem);
+    }
+}
+
+/* —— Floating focus button —— */
+.btn-footer-everon-focus {
+    border: none !important;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+}
+
+.btn-footer-everon-focus .fa {
+    color: inherit;
+}
+
+.theme-everon-focus-btn__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    font-size: 1rem;
+    line-height: 1;
+}
+
+.theme-everon-focus-btn__icon[hidden] {
+    display: none !important;
+}
+
+/* —— Focus mode layout —— */
+html.theme-everon-focus-mode .secondary-navigation,
+body.theme-everon-focus-mode .secondary-navigation,
+html.theme-everon-focus-mode .tertiary-navigation,
+body.theme-everon-focus-mode .tertiary-navigation,
+html.theme-everon-focus-mode .drawer-toggles,
+body.theme-everon-focus-mode .drawer-toggles,
+html.theme-everon-focus-mode .drawer-toggler,
+body.theme-everon-focus-mode .drawer-toggler,
+html.theme-everon-focus-mode #region-main-settings-menu,
+body.theme-everon-focus-mode #region-main-settings-menu,
+html.theme-everon-focus-mode .region_main_settings_menu_proxy,
+body.theme-everon-focus-mode .region_main_settings_menu_proxy {
+    display: none !important;
+}
+
+html.theme-everon-focus-mode .drawer.drawer-left,
+html.theme-everon-focus-mode .drawer.drawer-right,
+body.theme-everon-focus-mode .drawer.drawer-left,
+body.theme-everon-focus-mode .drawer.drawer-right {
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+html.theme-everon-focus-mode #page.drawers,
+body.theme-everon-focus-mode #page.drawers {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+body.theme-everon-focus-mode.limitedwidth #page.drawers .main-inner,
+body.theme-everon-focus-mode.limitedwidth.uses-drawers #page.drawers .main-inner,
+html.theme-everon-focus-mode body.limitedwidth #page.drawers .main-inner,
+html.theme-everon-focus-mode body.limitedwidth.uses-drawers #page.drawers .main-inner,
+body.theme-everon-focus-mode #page.drawers .main-inner,
+html.theme-everon-focus-mode #page.drawers .main-inner {
+    max-width: min(92rem, calc(100vw - 2.5rem)) !important;
+    width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+}
+
+body.theme-everon-focus-mode.limitedwidth .header-maxwidth,
+html.theme-everon-focus-mode body.limitedwidth .header-maxwidth,
+body.theme-everon-focus-mode .header-maxwidth,
+html.theme-everon-focus-mode .header-maxwidth {
+    max-width: min(92rem, calc(100vw - 2.5rem)) !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+html.theme-everon-focus-mode #page-content,
+body.theme-everon-focus-mode #page-content {
+    padding-top: 0.25rem;
+}
+
+/* On-screen hint while focus mode is active. */
+.theme-everon-focus-notice {
+    margin: 0 0 1rem;
+    padding: 0.65rem 1rem;
+    border-radius: 0.65rem;
+    background: color-mix(in srgb, var(--cn-primary, var(--bs-primary, #e67e22)) 12%, var(--bs-body-bg, #fff));
+    border: 1px solid color-mix(in srgb, var(--cn-primary, var(--bs-primary, #e67e22)) 28%, transparent);
+    color: var(--bs-body-color, #3f444e);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+html.theme-everon-a11y-dark-mode .theme-everon-focus-notice {
+    background: color-mix(in srgb, var(--cn-primary, var(--bs-primary, #e67e22)) 14%, #1f2329);
+    border-color: rgba(255, 255, 255, 0.12);
+    color: #e8eaed;
+}

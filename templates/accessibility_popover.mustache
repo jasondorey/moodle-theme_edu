@@ -1,0 +1,142 @@
+{{!
+    @template theme_everon/accessibility_popover
+
+    Accessibility toolbar — opens beside cluster toggles (after messages).
+}}
+<div
+    class="popover-region collapsed popover-region-accessibility custom-navbar__a11y-popover"
+    id="nav-accessibility-popover-container"
+    data-region="popover-region-accessibility"
+>
+    <div
+        class="popover-region-toggle nav-link icon-no-margin custom-navbar__a11y-toggle"
+        data-region="popover-region-toggle"
+        role="button"
+        tabindex="0"
+        aria-haspopup="dialog"
+        aria-expanded="false"
+        aria-controls="nav-accessibility-popover-panel"
+        title="{{#str}} accessibilitymenu, theme_everon {{/str}}"
+        aria-label="{{#str}} accessibilitymenu, theme_everon {{/str}}"
+    >
+        <span class="custom-navbar__cluster-disc" aria-hidden="true">
+            <i class="icon fa fa-universal-access fa-fw" aria-hidden="true"></i>
+        </span>
+    </div>
+    <div
+        id="nav-accessibility-popover-panel"
+        class="popover-region-container custom-navbar__a11y-panel"
+        data-region="popover-region-container"
+        role="dialog"
+        aria-modal="true"
+        aria-hidden="true"
+        aria-label="{{#str}} accessibilitymenu, theme_everon {{/str}}"
+        tabindex="-1"
+    >
+        <div class="custom-navbar__a11y-panel-inner" data-region="a11y-panel">
+            <section class="custom-navbar__a11y-section">
+                <h3 class="custom-navbar__a11y-section-title">{{#str}} a11ycontentadjustments, theme_everon {{/str}}</h3>
+
+                <div class="custom-navbar__a11y-font-card" data-a11y-control="font-size">
+                    <div class="custom-navbar__a11y-font-card-head">
+                        <span class="custom-navbar__a11y-option-icon" aria-hidden="true"><i class="fa fa-text-height"></i></span>
+                        <span class="custom-navbar__a11y-option-label">{{#str}} a11yadjustfontsize, theme_everon {{/str}}</span>
+                    </div>
+                    <div class="custom-navbar__a11y-font-controls">
+                        <button type="button" class="custom-navbar__a11y-step-btn" data-a11y-action="font-decrease" aria-label="{{#str}} a11ydecreasefont, theme_everon {{/str}}">−</button>
+                        <span class="custom-navbar__a11y-font-value" data-a11y-font-value>100%</span>
+                        <button type="button" class="custom-navbar__a11y-step-btn" data-a11y-action="font-increase" aria-label="{{#str}} a11yincreasefont, theme_everon {{/str}}">+</button>
+                    </div>
+                </div>
+
+                <div class="custom-navbar__a11y-grid">
+                    <button type="button" class="custom-navbar__a11y-option" data-a11y-toggle="highlightTitle" aria-pressed="false">
+                        <span class="custom-navbar__a11y-option-icon" aria-hidden="true"><i class="fa fa-font"></i><span class="custom-navbar__a11y-icon-underline"></span></span>
+                        <span class="custom-navbar__a11y-option-label">{{#str}} a11yhighlighttitle, theme_everon {{/str}}</span>
+                    </button>
+                    <button type="button" class="custom-navbar__a11y-option" data-a11y-toggle="highlightLinks" aria-pressed="false">
+                        <span class="custom-navbar__a11y-option-icon" aria-hidden="true"><i class="fa fa-link"></i></span>
+                        <span class="custom-navbar__a11y-option-label">{{#str}} a11yhighlightlinks, theme_everon {{/str}}</span>
+                    </button>
+                    <button type="button" class="custom-navbar__a11y-option" data-a11y-toggle="dyslexiaFont" aria-pressed="false">
+                        <span class="custom-navbar__a11y-option-icon" aria-hidden="true"><i class="fa fa-font"></i><i class="fa fa-check custom-navbar__a11y-icon-badge"></i></span>
+                        <span class="custom-navbar__a11y-option-label">{{#str}} a11ydyslexiafont, theme_everon {{/str}}</span>
+                    </button>
+                    <button type="button" class="custom-navbar__a11y-option" data-a11y-toggle="letterSpacing" aria-pressed="false">
+                        <span class="custom-navbar__a11y-option-icon" aria-hidden="true"><span class="custom-navbar__a11y-icon-spacing">|A|</span></span>
+                        <span class="custom-navbar__a11y-option-label">{{#str}} a11yletterspacing, theme_everon {{/str}}</span>
+                    </button>
+                    <button type="button" class="custom-navbar__a11y-option" data-a11y-toggle="lineHeight" aria-pressed="false">
+                        <span class="custom-navbar__a11y-option-icon" aria-hidden="true"><i class="fa fa-align-justify"></i></span>
+                        <span class="custom-navbar__a11y-option-label">{{#str}} a11ylineheight, theme_everon {{/str}}</span>
+                    </button>
+                    <button type="button" class="custom-navbar__a11y-option" data-a11y-toggle="fontWeight" aria-pressed="false">
+                        <span class="custom-navbar__a11y-option-icon" aria-hidden="true"><strong>B</strong></span>
+                        <span class="custom-navbar__a11y-option-label">{{#str}} a11yfontweight, theme_everon {{/str}}</span>
+                    </button>
+                </div>
+            </section>
+
+            <section class="custom-navbar__a11y-section">
+                <h3 class="custom-navbar__a11y-section-title">{{#str}} a11ycoloradjustments, theme_everon {{/str}}</h3>
+                <div class="custom-navbar__a11y-grid">
+                    <button type="button" class="custom-navbar__a11y-option" data-a11y-toggle="darkContrast" data-a11y-group="contrast" aria-pressed="false">
+                        <span class="custom-navbar__a11y-option-icon custom-navbar__a11y-icon-split" aria-hidden="true"></span>
+                        <span class="custom-navbar__a11y-option-label">{{#str}} a11ydarkcontrast, theme_everon {{/str}}</span>
+                    </button>
+                    <button type="button" class="custom-navbar__a11y-option" data-a11y-toggle="lightContrast" data-a11y-group="contrast" aria-pressed="false">
+                        <span class="custom-navbar__a11y-option-icon" aria-hidden="true"><i class="fa fa-sun"></i></span>
+                        <span class="custom-navbar__a11y-option-label">{{#str}} a11ylightcontrast, theme_everon {{/str}}</span>
+                    </button>
+                    <button type="button" class="custom-navbar__a11y-option" data-a11y-toggle="highContrast" data-a11y-group="contrast" aria-pressed="false">
+                        <span class="custom-navbar__a11y-option-icon custom-navbar__a11y-icon-split custom-navbar__a11y-icon-split--striped" aria-hidden="true"></span>
+                        <span class="custom-navbar__a11y-option-label">{{#str}} a11yhighcontrast, theme_everon {{/str}}</span>
+                    </button>
+                    <button type="button" class="custom-navbar__a11y-option" data-a11y-toggle="highSaturation" data-a11y-group="saturation" aria-pressed="false">
+                        <span class="custom-navbar__a11y-option-icon" aria-hidden="true"><i class="fa fa-tint"></i></span>
+                        <span class="custom-navbar__a11y-option-label">{{#str}} a11yhighsaturation, theme_everon {{/str}}</span>
+                    </button>
+                    <button type="button" class="custom-navbar__a11y-option" data-a11y-toggle="lowSaturation" data-a11y-group="saturation" aria-pressed="false">
+                        <span class="custom-navbar__a11y-option-icon" aria-hidden="true"><i class="fa fa-tint custom-navbar__a11y-icon-outline"></i></span>
+                        <span class="custom-navbar__a11y-option-label">{{#str}} a11ylowsaturation, theme_everon {{/str}}</span>
+                    </button>
+                    <button type="button" class="custom-navbar__a11y-option" data-a11y-toggle="monochrome" data-a11y-group="saturation" aria-pressed="false">
+                        <span class="custom-navbar__a11y-option-icon custom-navbar__a11y-icon-mono" aria-hidden="true"></span>
+                        <span class="custom-navbar__a11y-option-label">{{#str}} a11ymonochrome, theme_everon {{/str}}</span>
+                    </button>
+                    <button type="button" class="custom-navbar__a11y-option custom-navbar__a11y-option--wide" data-a11y-toggle="darkMode" aria-pressed="false">
+                        <span class="custom-navbar__a11y-option-icon" aria-hidden="true"><i class="fa fa-moon"></i></span>
+                        <span class="custom-navbar__a11y-option-label">{{#str}} a11ydarkmode, theme_everon {{/str}}</span>
+                    </button>
+                </div>
+            </section>
+
+            <section class="custom-navbar__a11y-section">
+                <h3 class="custom-navbar__a11y-section-title">{{#str}} a11ytools, theme_everon {{/str}}</h3>
+                <div class="custom-navbar__a11y-grid custom-navbar__a11y-grid--tools">
+                    <button type="button" class="custom-navbar__a11y-option" data-a11y-toggle="readingGuide" aria-pressed="false">
+                        <span class="custom-navbar__a11y-option-icon" aria-hidden="true"><i class="fa fa-book"></i></span>
+                        <span class="custom-navbar__a11y-option-label">{{#str}} a11yreadingguide, theme_everon {{/str}}</span>
+                    </button>
+                    <button type="button" class="custom-navbar__a11y-option" data-a11y-toggle="stopAnimations" aria-pressed="false">
+                        <span class="custom-navbar__a11y-option-icon" aria-hidden="true"><i class="fa fa-circle-stop"></i></span>
+                        <span class="custom-navbar__a11y-option-label">{{#str}} a11ystopanimations, theme_everon {{/str}}</span>
+                    </button>
+                    <button type="button" class="custom-navbar__a11y-option" data-a11y-toggle="bigCursor" aria-pressed="false">
+                        <span class="custom-navbar__a11y-option-icon" aria-hidden="true"><i class="fa fa-mouse-pointer"></i></span>
+                        <span class="custom-navbar__a11y-option-label">{{#str}} a11ybigcursor, theme_everon {{/str}}</span>
+                    </button>
+                </div>
+            </section>
+
+            <div class="custom-navbar__a11y-footer">
+                <button type="button" class="custom-navbar__a11y-reset" data-a11y-action="reset">{{#str}} a11yresetall, theme_everon {{/str}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{#js}}
+require(['theme_everon/navbar_accessibility'], function(A11y) {
+    A11y.init();
+});
+{{/js}}

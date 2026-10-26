@@ -1,0 +1,26 @@
+/**
+ * Shared Everon popover / panel chrome tokens.
+ * Used by Accessibility, Launch Pad, and the profile usermenu.
+ */
+
+:root {
+    --everon-popover-accent: var(--cn-primary, var(--bs-primary, #e67e22));
+    --everon-popover-bg: #f3f4f6;
+    --everon-popover-text: var(--cn-text, #3f444e);
+    --everon-popover-muted: rgba(63, 68, 78, 0.72);
+    --everon-popover-divider: rgba(63, 68, 78, 0.12);
+    --everon-popover-radius: 0.75rem;
+    --everon-popover-border: 1px solid color-mix(
+        in srgb,
+        var(--everon-popover-accent) 38%,
+        rgba(63, 68, 78, 0.12)
+    );
+    --everon-popover-shadow:
+        0 12px 36px color-mix(in srgb, var(--everon-popover-accent) 22%, rgba(63, 68, 78, 0.14)),
+        0 0 0 1px color-mix(in srgb, var(--everon-popover-accent) 10%, transparent);
+    --everon-popover-item-hover-border: color-mix(
+        in srgb,
+        var(--everon-popover-accent) 40%,
+        transparent
+    );
+}
