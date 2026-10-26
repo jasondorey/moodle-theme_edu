@@ -1,0 +1,23 @@
+/**
+ * OpenDyslexic — loaded directly (not via theme/styles.php) so font URLs resolve correctly.
+ *
+ * @package    theme_custom
+ * @copyright  2026
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+@font-face {
+    font-family: "OpenDyslexic";
+    src: url("OpenDyslexic-Regular.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "OpenDyslexic";
+    src: url("OpenDyslexic-Bold.woff") format("woff");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}

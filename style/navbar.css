@@ -1,0 +1,72 @@
+/**
+ * Everon compact navbar chrome.
+ * Gated by body.theme-everon-compact-navbar (enablecompactnavbar, default Yes).
+ * Logo / brand colour: configure via Boost Union Look (per-site) — not this file.
+ * Does not touch login layout. Keep Focus Mode FAB / drawer offsets intact.
+ */
+
+body.theme-everon-compact-navbar {
+    --everon-navbar-pad-y: 0.15rem;
+    --everon-navbar-icon: 2.15rem;
+}
+
+/* Tighter primary bar — do not override #page.drawers margin-top
+ * (Boost/Union sticky offset must stay aligned with real navbar height). */
+body.theme-everon-compact-navbar nav.navbar.fixed-top {
+    padding-top: var(--everon-navbar-pad-y);
+    padding-bottom: var(--everon-navbar-pad-y);
+}
+
+body.theme-everon-compact-navbar nav.navbar.fixed-top .navbar-brand {
+    padding-block: 0.1rem;
+    margin-right: 0.65rem;
+}
+
+body.theme-everon-compact-navbar nav.navbar.fixed-top .navbar-brand img,
+body.theme-everon-compact-navbar nav.navbar.fixed-top .navbar-brand .logo {
+    max-height: 1.85rem;
+    width: auto;
+}
+
+/* Primary nav links — clearer active underline, compact padding */
+body.theme-everon-compact-navbar nav.navbar .primary-navigation .nav-link,
+body.theme-everon-compact-navbar nav.navbar .more-nav > .nav-item > .nav-link {
+    padding-block: 0.5rem;
+    padding-inline: 0.7rem;
+    font-size: 0.925rem;
+    line-height: 1.25;
+}
+
+body.theme-everon-compact-navbar nav.navbar .primary-navigation .nav-link.active,
+body.theme-everon-compact-navbar nav.navbar .more-nav > .nav-item > .nav-link.active {
+    box-shadow: inset 0 -2px 0 currentColor;
+}
+
+/* Utility icons — consistent hit targets */
+body.theme-everon-compact-navbar #usernavigation .nav-link,
+body.theme-everon-compact-navbar #usernavigation .btn,
+body.theme-everon-compact-navbar #usernavigation > .nav-item > a,
+body.theme-everon-compact-navbar #usernavigation > a {
+    min-width: var(--everon-navbar-icon);
+    min-height: var(--everon-navbar-icon);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.3rem;
+}
+
+body.theme-everon-compact-navbar #usernavigation .usermenu .dropdown-toggle {
+    min-height: var(--everon-navbar-icon);
+    padding-block: 0.2rem;
+}
+
+/* Soft grouping: Launch Pad sits closer to a11y in the utility cluster */
+body.theme-everon-compact-navbar #usernavigation .fa-location-crosshairs {
+    margin-inline-start: -0.1rem;
+}
+
+/* Edit-mode toggle: slightly denser */
+body.theme-everon-compact-navbar .editmode-switch-form,
+body.theme-everon-compact-navbar [data-region="editmode-toggle"] {
+    margin-inline-end: 0.25rem;
+}

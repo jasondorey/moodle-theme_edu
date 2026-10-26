@@ -1,0 +1,149 @@
+/**
+ * Profile usermenu — Launch Pad–style tile grid (gated by body.theme-everon-usermenu-tiles).
+ * Panel chrome remains in usermenu.css / popover_chrome.css.
+ */
+
+body.theme-everon-usermenu-tiles .usermenu #user-action-menu.dropdown-menu,
+body.theme-everon-usermenu-tiles #usernavigation .usermenu #user-action-menu.dropdown-menu {
+    width: 22.5rem;
+    min-width: 22.5rem;
+    max-width: min(22.5rem, calc(100vw - 1.5rem));
+    padding: 0.85rem 0.75rem 0.75rem;
+}
+
+/* Hide leftover dividers if any slip through; tile mode omits them in Mustache. */
+body.theme-everon-usermenu-tiles .usermenu #user-action-menu .dropdown-divider {
+    display: none;
+}
+
+body.theme-everon-usermenu-tiles .usermenu #user-action-menu #carousel-item-main {
+    padding: 0;
+}
+
+body.theme-everon-usermenu-tiles .everon-usermenu__grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 0.45rem !important;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body.theme-everon-usermenu-tiles .usermenu #user-action-menu .everon-usermenu__tile.dropdown-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    width: 100%;
+    min-width: 0;
+    min-height: 4.25rem;
+    margin: 0;
+    padding: 0.45rem 0.3rem;
+    border: 1px solid rgba(63, 68, 78, 0.12);
+    border-radius: 0.5rem;
+    background: #fff;
+    color: var(--everon-popover-text, #3f444e);
+    font-family: inherit;
+    font-size: 0.625rem;
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    white-space: normal;
+    box-shadow: 0 1px 2px rgba(63, 68, 78, 0.06);
+    transition: border-color 0.12s ease, box-shadow 0.12s ease, background 0.12s ease, color 0.12s ease;
+}
+
+body.theme-everon-usermenu-tiles .usermenu #user-action-menu .everon-usermenu__tile.dropdown-item:hover,
+body.theme-everon-usermenu-tiles .usermenu #user-action-menu .everon-usermenu__tile.dropdown-item:focus,
+body.theme-everon-usermenu-tiles .usermenu #user-action-menu .everon-usermenu__tile.dropdown-item:focus-visible,
+body.theme-everon-usermenu-tiles .usermenu #user-action-menu .everon-usermenu__tile.dropdown-item.active,
+body.theme-everon-usermenu-tiles .usermenu #user-action-menu .everon-usermenu__tile.dropdown-item:active {
+    border-color: color-mix(
+        in srgb,
+        var(--everon-popover-accent, var(--bs-primary, #e67e22)) 40%,
+        transparent
+    ) !important;
+    background: #fff !important;
+    color: var(--everon-popover-accent, var(--bs-primary, #e67e22)) !important;
+    outline: none;
+    text-decoration: none;
+    box-shadow: none;
+}
+
+body.theme-everon-usermenu-tiles .everon-usermenu__tile-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    line-height: 1;
+    color: var(--everon-popover-text, #3f444e);
+    transition: color 0.12s ease;
+}
+
+body.theme-everon-usermenu-tiles .everon-usermenu__tile-icon .fa,
+body.theme-everon-usermenu-tiles .everon-usermenu__tile-icon .icon {
+    color: inherit;
+    margin: 0;
+    width: auto;
+    height: auto;
+    font-size: inherit;
+}
+
+body.theme-everon-usermenu-tiles .everon-usermenu__tile-icon img {
+    width: 1.15rem;
+    height: 1.15rem;
+    object-fit: contain;
+}
+
+body.theme-everon-usermenu-tiles .usermenu #user-action-menu .everon-usermenu__tile.dropdown-item:hover .everon-usermenu__tile-icon,
+body.theme-everon-usermenu-tiles .usermenu #user-action-menu .everon-usermenu__tile.dropdown-item:focus .everon-usermenu__tile-icon,
+body.theme-everon-usermenu-tiles .usermenu #user-action-menu .everon-usermenu__tile.dropdown-item:focus-visible .everon-usermenu__tile-icon,
+body.theme-everon-usermenu-tiles .usermenu #user-action-menu .everon-usermenu__tile.dropdown-item:hover .everon-usermenu__tile-label,
+body.theme-everon-usermenu-tiles .usermenu #user-action-menu .everon-usermenu__tile.dropdown-item:focus .everon-usermenu__tile-label,
+body.theme-everon-usermenu-tiles .usermenu #user-action-menu .everon-usermenu__tile.dropdown-item:focus-visible .everon-usermenu__tile-label {
+    color: var(--everon-popover-accent, var(--bs-primary, #e67e22)) !important;
+}
+
+body.theme-everon-usermenu-tiles .everon-usermenu__tile-label {
+    display: -webkit-box;
+    max-width: 100%;
+    overflow: hidden;
+    color: inherit;
+    transition: color 0.12s ease;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+}
+
+/* Language (and other) carousel submenu slides stay a vertical list. */
+body.theme-everon-usermenu-tiles .usermenu #user-action-menu .carousel-item.submenu .dropdown-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.45rem;
+    min-height: 0;
+    margin: 0 0.35rem;
+    padding: 0.55rem 0.85rem;
+    border: 1px solid transparent;
+    border-radius: 0.5rem;
+    background: transparent;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.35;
+    text-align: start;
+    box-shadow: none;
+}
+
+body.theme-everon-usermenu-tiles .usermenu #user-action-menu .carousel-item.submenu .dropdown-divider {
+    display: block;
+}
+
+
+/* Hide core carousel chevron affordance on Language tile (icon+label are enough). */
+body.theme-everon-usermenu-tiles .usermenu #user-action-menu .everon-usermenu__tile.carousel-navigation-link::after {
+    content: none;
+    display: none;
+}
