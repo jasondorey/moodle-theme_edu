@@ -22,7 +22,6 @@
         0 0 0 1px color-mix(in srgb, var(--everon-popover-accent) 10%, transparent)
     );
     color: var(--everon-popover-text, #3f444e);
-    font-family: "Noto Sans", "Segoe UI", system-ui, sans-serif;
     overflow: visible;
     z-index: 1050;
 }
