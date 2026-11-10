@@ -4,22 +4,6 @@
  * It will be added on top of Boost Union's Pre-SCSS code.
  *
  * Keep this minimal — prefer Boost Union Look settings for branding.
+ * Do not set $font-family-sans-serif or $font-family-base here;
+ * Everon inherits the parent theme font.
  ***************************************************************/
-
-// Brand default: Noto Sans (bundled WOFF2 via fonts/noto-sans.css) + system fallbacks.
-// No !default — Everon always wins over Boost/Union stock stacks.
-$font-family-sans-serif:
-    "Noto Sans",
-    system-ui,
-    -apple-system,
-    "Segoe UI",
-    Roboto,
-    "Helvetica Neue",
-    Arial,
-    "Liberation Sans",
-    sans-serif,
-    "Apple Color Emoji",
-    "Segoe UI Emoji",
-    "Segoe UI Symbol",
-    "Noto Color Emoji";
-$font-family-base: $font-family-sans-serif;
