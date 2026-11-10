@@ -23,7 +23,8 @@
 define([
     'jquery',
     'theme_everon/navbar_a11y_popovers',
-], function($, ClusterPopovers) {
+    'core/local/aria/focuslock',
+], function($, ClusterPopovers, FocusLock) {
 
     const bootApi = window.themeEveronA11y || null;
     const STORAGE_KEY = bootApi ? bootApi.STORAGE_KEY : 'theme_everon_a11y_v1';
@@ -292,10 +293,44 @@ define([
             return;
         }
 
-        const close = () => {
+        // Notifications call FocusLock.trapFocus on the panel in the menuOpened turn, so the
+        // toggle is not :focus when the browser paints. untrapFocus does not move focus;
+        // the notification popover calls focusMenuToggle only from its Escape handler.
+        let focusTrapped = false;
+
+        /**
+         * Trap focus inside the open panel and move it off the navbar toggle.
+         */
+        const trapPanelFocus = () => {
+            if (focusTrapped) {
+                return;
+            }
+            FocusLock.trapFocus(panel);
+            focusTrapped = true;
+        };
+
+        /**
+         * Release this panel's trap once. Does not move focus.
+         */
+        const releasePanelFocus = () => {
+            if (!focusTrapped) {
+                return;
+            }
+            focusTrapped = false;
+            FocusLock.untrapFocus();
+        };
+
+        /**
+         * @param {{returnFocus?: boolean}} [options] Set returnFocus for Escape only.
+         */
+        const close = (options) => {
             container.classList.add('collapsed');
             toggle.setAttribute('aria-expanded', 'false');
             panel.setAttribute('aria-hidden', 'true');
+            releasePanelFocus();
+            if (options && options.returnFocus) {
+                toggle.focus();
+            }
         };
 
         const open = () => {
@@ -303,9 +338,16 @@ define([
             container.classList.remove('collapsed');
             toggle.setAttribute('aria-expanded', 'true');
             panel.setAttribute('aria-hidden', 'false');
+            trapPanelFocus();
         };
 
         const isOpen = () => !container.classList.contains('collapsed');
+
+        // Other navbar icons close this region by adding `collapsed` directly.
+        // Release the trap in that same turn so it cannot pull focus back.
+        container.addEventListener('theme_everon:popoverregionclosed', () => {
+            releasePanelFocus();
+        });
 
         toggle.addEventListener('click', (event) => {
             event.preventDefault();
@@ -336,7 +378,7 @@ define([
 
         document.addEventListener('keydown', (event) => {
             if (event.key === 'Escape' && isOpen()) {
-                close();
+                close({returnFocus: true});
             }
         });
     };

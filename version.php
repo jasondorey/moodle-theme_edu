@@ -29,8 +29,8 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'theme_everon';
-$plugin->version = 2026102223;
-$plugin->release = 'v5.2-r37';
+$plugin->version = 2026102224;
+$plugin->release = 'v5.2-r38';
 $plugin->requires = 2026042000; // Moodle 5.2.
 $plugin->supported = [502, 502];
 $plugin->maturity = MATURITY_STABLE;

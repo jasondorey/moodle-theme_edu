@@ -6,6 +6,7 @@ Changes
 
 ### Rolling release
 
+* 2026-11-10 - Accessibility navbar panel: move focus into the panel on open, matching notification FocusLock; return focus to the toggle on Escape only (v5.2-r38)
 * 2026-11-10 - Remove the forced Noto Sans default so Everon uses the parent theme font (v5.2-r37)
 * 2026-10-22 - Default font: Noto Sans replaces Rubik (bundled WOFF2 400/500/600/700, OFL; `fonts/noto-sans.css`; Pre-SCSS `$font-family-sans-serif` / `$font-family-base`) (v5.2-r36)
 * 2026-10-22 - Launch Pad navbar icon: FA Free `location-crosshairs` (`icon fa fa-location-crosshairs fa-fw`); was `circle-chevron-down` (v5.2-r35)
