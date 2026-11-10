@@ -29,10 +29,10 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'theme_everon';
-$plugin->version = 2026102222;
-$plugin->release = 'v5.2-r36';
-$plugin->requires = 2026042000; // Moodle 5.2.
-$plugin->supported = [502, 502];
+$plugin->version = 2026111000;
+$plugin->release = 'v5.3-r1';
+$plugin->requires = 2026100500; // Moodle 5.3.
+$plugin->supported = [503, 503];
 $plugin->maturity = MATURITY_STABLE;
 // Pinned to Boost Union v5.2-r13 (https://github.com/moodle-an-hochschulen/moodle-theme_boost_union).
 $plugin->dependencies = ['theme_boost_union' => 2026042019];
