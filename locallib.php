@@ -57,18 +57,38 @@ function theme_everon_get_a11y_boot_html(): string {
         $js = '';
     }
 
-    $critical = <<<'CSS'
-html.theme-everon-a11y-dark-mode{background-color:#16181d!important;color-scheme:dark;}
-html.theme-everon-a11y-dark-mode body{background-color:#16181d!important;color:#e8eaed!important;}
-html.theme-everon-a11y-dark-mode #page-wrapper{background-color:#16181d!important;}
-CSS;
-
-    $cached = '<style id="theme-everon-a11y-boot-css">' . $critical . '</style>';
+    // Dark/light paint is owned by Boost colour modes (data-bs-theme). Do not inject
+    // critical CSS for the retired theme-everon-a11y-dark-mode path.
+    $cached = '';
     if ($js !== '') {
         $cached .= '<script id="theme-everon-a11y-boot">' . $js . '</script>';
     }
 
     return $cached;
+}
+
+/**
+ * Template context for the accessibility popover (Boost colour-mode bridge metadata).
+ *
+ * @return array
+ */
+function theme_everon_accessibility_popover_context(): array {
+    $context = [
+        'colourmodeenabled' => false,
+        'colourmodecookieattributes' => '',
+    ];
+
+    if (!class_exists(\theme_boost\colour_mode::class)) {
+        return $context;
+    }
+
+    if (!\theme_boost\colour_mode::is_enabled()) {
+        return $context;
+    }
+
+    $context['colourmodeenabled'] = true;
+    $context['colourmodecookieattributes'] = \theme_boost\colour_mode::get_cookie_attributes();
+    return $context;
 }
 
 /**

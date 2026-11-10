@@ -6,6 +6,7 @@ Changes
 
 ### Rolling release
 
+* 2026-11-10 - Accessibility Dark Mode tile drives Boost colour modes (`data-bs-theme` / `theme_boost_colourmode`); retire Everon `theme-everon-a11y-dark-mode` CSS path; hide Boost colour-mode navbar menu (v5.3-r4)
 * 2026-11-10 - Accessibility navbar panel: move focus into the panel on open, matching notification FocusLock; return focus to the toggle on Escape only (v5.3-r3)
 * 2026-11-10 - Remove the forced Noto Sans default so Everon uses the parent theme font (v5.3-r2)
 * 2026-11-10 - Branch starts Moodle 5.3 support (v5.3-r1)

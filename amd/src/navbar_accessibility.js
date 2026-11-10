@@ -16,6 +16,9 @@
 /**
  * Navbar accessibility menu — applies adjustments site-wide with localStorage persistence.
  *
+ * Dark Mode is bridged to Boost colour modes (preference theme_boost_colourmode + cookie +
+ * data-bs-theme), not the retired theme-everon-a11y-dark-mode class.
+ *
  * @module     theme_everon/navbar_accessibility
  * @copyright  2026
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -24,7 +27,8 @@ define([
     'jquery',
     'theme_everon/navbar_a11y_popovers',
     'core/local/aria/focuslock',
-], function($, ClusterPopovers, FocusLock) {
+    'core_user/repository',
+], function($, ClusterPopovers, FocusLock, UserRepository) {
 
     const bootApi = window.themeEveronA11y || null;
     const STORAGE_KEY = bootApi ? bootApi.STORAGE_KEY : 'theme_everon_a11y_v1';
@@ -33,7 +37,14 @@ define([
     const FONT_MAX = 150;
     const FONT_STEP = 5;
 
+    // Mirror theme_boost/colourmode: preference + cookie name used by Boost colour modes.
+    const COLOURMODE_PREFERENCE = 'theme_boost_colourmode';
+    const MODE_LIGHT = 'light';
+    const MODE_DARK = 'dark';
+    const LEGACY_DARK_CLASS = 'theme-everon-a11y-dark-mode';
+
     const HTML_CLASS = 'theme-everon-a11y-active';
+    // darkMode is intentionally absent: the a11y tile drives Boost data-bs-theme instead.
     const CLASS_MAP = bootApi ? bootApi.CLASS_MAP : {
         highlightTitle: 'theme-everon-a11y-highlight-title',
         highlightLinks: 'theme-everon-a11y-highlight-links',
@@ -47,7 +58,6 @@ define([
         highSaturation: 'theme-everon-a11y-high-saturation',
         lowSaturation: 'theme-everon-a11y-low-saturation',
         monochrome: 'theme-everon-a11y-monochrome',
-        darkMode: 'theme-everon-a11y-dark-mode',
         readingGuide: 'theme-everon-a11y-reading-guide-on',
         stopAnimations: 'theme-everon-a11y-stop-animations',
         bigCursor: 'theme-everon-a11y-big-cursor',
@@ -85,21 +95,87 @@ define([
     let currentState = null;
 
     /**
+     * @returns {boolean}
+     */
+    const colourModeBridgeEnabled = () => {
+        const container = document.getElementById(CONTAINER_ID);
+        return !!(container && container.dataset.colourmodeBridge === '1');
+    };
+
+    /**
+     * Cookie attribute suffix from Boost (Path/Domain/Secure/SameSite), when available.
+     *
+     * @returns {string}
+     */
+    const getColourModeCookieAttributes = () => {
+        const container = document.getElementById(CONTAINER_ID);
+        if (container && typeof container.dataset.colourmodeCookieattributes === 'string') {
+            return container.dataset.colourmodeCookieattributes;
+        }
+        return '; Path=/; SameSite=Lax';
+    };
+
+    /**
+     * Whether Boost currently has an explicit dark colour mode chosen.
+     *
+     * @returns {boolean}
+     */
+    const isBoostDarkMode = () => {
+        return document.documentElement.getAttribute('data-colourmode') === MODE_DARK;
+    };
+
+    /**
+     * Apply a Boost colour mode the same way theme_boost/colourmode does:
+     * data-colourmode + data-bs-theme, preference, and cookie.
+     *
+     * @param {string} mode light|dark
+     */
+    const applyBoostColourMode = (mode) => {
+        if (mode !== MODE_LIGHT && mode !== MODE_DARK) {
+            return;
+        }
+        const root = document.documentElement;
+        root.setAttribute('data-colourmode', mode);
+        root.setAttribute('data-bs-theme', mode);
+        root.classList.remove(LEGACY_DARK_CLASS);
+
+        document.cookie = COLOURMODE_PREFERENCE + '=' + mode + getColourModeCookieAttributes();
+
+        if (colourModeBridgeEnabled() && UserRepository && typeof UserRepository.setUserPreference === 'function') {
+            UserRepository.setUserPreference(COLOURMODE_PREFERENCE, mode);
+        }
+    };
+
+    /**
+     * Sync the a11y Dark Mode tile from Boost's chosen colour mode (not localStorage).
+     *
+     * @param {object} state
+     * @returns {object}
+     */
+    const syncDarkModeFromBoost = (state) => {
+        return {...state, darkMode: isBoostDarkMode()};
+    };
+
+    /**
      * @returns {object}
      */
     const loadState = () => {
+        let state;
         if (bootApi && typeof bootApi.loadState === 'function') {
-            return bootApi.loadState();
-        }
-        try {
-            const raw = window.localStorage.getItem(STORAGE_KEY);
-            if (!raw) {
-                return {...DEFAULTS};
+            state = bootApi.loadState();
+        } else {
+            try {
+                const raw = window.localStorage.getItem(STORAGE_KEY);
+                if (!raw) {
+                    state = {...DEFAULTS};
+                } else {
+                    state = {...DEFAULTS, ...JSON.parse(raw)};
+                }
+            } catch (e) {
+                state = {...DEFAULTS};
             }
-            return {...DEFAULTS, ...JSON.parse(raw)};
-        } catch (e) {
-            return {...DEFAULTS};
         }
+        return syncDarkModeFromBoost(state);
     };
 
     /**
@@ -107,7 +183,9 @@ define([
      */
     const saveState = (state) => {
         try {
-            window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+            // Persist assistive prefs only; Boost owns colour-mode persistence.
+            const toStore = {...state, darkMode: false};
+            window.localStorage.setItem(STORAGE_KEY, JSON.stringify(toStore));
         } catch (e) {
             // Ignore quota errors.
         }
@@ -169,6 +247,7 @@ define([
         } else {
             const html = document.documentElement;
             html.classList.add(HTML_CLASS);
+            html.classList.remove(LEGACY_DARK_CLASS);
             html.style.setProperty('--theme-everon-a11y-font-scale', String(state.fontSize / 100));
 
             Object.keys(CLASS_MAP).forEach((key) => {
@@ -180,6 +259,9 @@ define([
                 }
             });
         }
+
+        // Belt-and-braces: never leave the retired Everon dark class on the document.
+        document.documentElement.classList.remove(LEGACY_DARK_CLASS);
 
         setReadingGuide(!!state.readingGuide);
         currentState = {...state};
@@ -227,11 +309,20 @@ define([
     /**
      * @param {HTMLElement} panelRoot
      * @param {object} nextState
+     * @param {{previousDarkMode?: boolean}} [options]
      */
-    const commitState = (panelRoot, nextState) => {
+    const commitState = (panelRoot, nextState, options) => {
+        const previousDarkMode = options && typeof options.previousDarkMode === 'boolean'
+            ? options.previousDarkMode
+            : !!(currentState && currentState.darkMode);
+
         applyState(nextState);
         saveState(nextState);
         syncPanelUi(panelRoot, nextState);
+
+        if (colourModeBridgeEnabled() && !!nextState.darkMode !== previousDarkMode) {
+            applyBoostColourMode(nextState.darkMode ? MODE_DARK : MODE_LIGHT);
+        }
     };
 
     /**
@@ -251,7 +342,12 @@ define([
             if (!key || !(key in DEFAULTS)) {
                 return;
             }
-            commitState(panelRoot, updateToggle(currentState, key, !currentState[key]));
+            const previousDarkMode = !!currentState.darkMode;
+            commitState(
+                panelRoot,
+                updateToggle(currentState, key, !currentState[key]),
+                {previousDarkMode: previousDarkMode}
+            );
             return;
         }
 
@@ -279,7 +375,8 @@ define([
             return;
         }
         if (action === 'reset') {
-            commitState(panelRoot, {...DEFAULTS});
+            const previousDarkMode = !!currentState.darkMode;
+            commitState(panelRoot, {...DEFAULTS}, {previousDarkMode: previousDarkMode});
         }
     };
 
