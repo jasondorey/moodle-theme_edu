@@ -188,10 +188,6 @@ function theme_everon_page_init(\moodle_page $page): void {
 
     $www = '/theme/everon';
 
-    // Noto Sans is the site-wide brand default — load on every layout (including login).
-    // Must load outside theme/styles.php so relative @font-face URLs resolve.
-    $page->requires->css($www . '/fonts/noto-sans.css');
-
     // Shared popover chrome + profile usermenu — always on with Everon (not login).
     if ($page->pagelayout !== 'login') {
         $page->requires->css($www . '/style/popover_chrome.css');
