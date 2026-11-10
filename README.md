@@ -7,7 +7,7 @@ It is scaffolded from [moodle-theme_boost_union_child](https://github.com/moodle
 
 ## Requirements
 
-- Moodle **5.2+** (`$plugin->requires` / `$plugin->supported` = 502)
+- Moodle **5.3** (`$plugin->requires` = `2026100500`, `$plugin->supported` = `[503, 503]`)
 - [theme_boost_union](https://github.com/moodle-an-hochschulen/moodle-theme_boost_union) **v5.2-r13+** (dependency pinned to `2026042019`)
 
 ## Installation
@@ -18,7 +18,7 @@ Install to folder:
 /theme/everon
 ```
 
-1. Install / upgrade **Boost Union** for Moodle 5.2 first.
+1. Install / upgrade **Boost Union** for Moodle 5.3 first.
 2. Copy this plugin to `/theme/everon` (or install `theme_everon.zip` via Site administration → Plugins → Install plugins).
 3. Visit Site administration → Notifications to install.
 4. Site administration → Appearance → Theme selector → enable **Everon**.
