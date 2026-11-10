@@ -35,6 +35,16 @@ require_once(__DIR__ . '/../../locallib.php');
 class core_renderer extends \theme_boost_union\output\core_renderer {
 
     /**
+     * Hide Boost's colour-mode navbar menu. Everon's a11y Dark Mode tile is the switcher;
+     * colour modes themselves stay enabled via theme_boost | enablecolourmodes.
+     *
+     * @return string
+     */
+    public function colour_mode_menu(): string {
+        return '';
+    }
+
+    /**
      * Append Everon navbar utilities after parent plugin output.
      * Order: … messages → accessibility → launch pad → (user menu follows in template).
      *
@@ -43,7 +53,10 @@ class core_renderer extends \theme_boost_union\output\core_renderer {
     public function navbar_plugin_output() {
         $output = parent::navbar_plugin_output();
         if (\theme_everon_accessibility_enabled()) {
-            $output .= $this->render_from_template('theme_everon/accessibility_popover', []);
+            $output .= $this->render_from_template(
+                'theme_everon/accessibility_popover',
+                \theme_everon_accessibility_popover_context()
+            );
         }
         $launchctx = \theme_everon_launchpad_template_context();
         if ($launchctx !== null) {

@@ -1,12 +1,16 @@
 /**
- * Apply stored accessibility settings before first paint (avoids light flash when dark mode is on).
+ * Apply stored accessibility settings before first paint (avoids flash when dark mode is on).
  * Loaded synchronously from theme_everon head — must stay plain JS (no AMD).
+ *
+ * On Moodle 5.3, site dark/light is Boost colour modes (data-bs-theme). This boot script no
+ * longer applies theme-everon-a11y-dark-mode; Boost's head hooks own that paint path.
  */
 (function(global) {
     'use strict';
 
     var STORAGE_KEY = 'theme_everon_a11y_v1';
     var HTML_CLASS = 'theme-everon-a11y-active';
+    var LEGACY_DARK_CLASS = 'theme-everon-a11y-dark-mode';
     var CLASS_MAP = {
         highlightTitle: 'theme-everon-a11y-highlight-title',
         highlightLinks: 'theme-everon-a11y-highlight-links',
@@ -20,7 +24,6 @@
         highSaturation: 'theme-everon-a11y-high-saturation',
         lowSaturation: 'theme-everon-a11y-low-saturation',
         monochrome: 'theme-everon-a11y-monochrome',
-        darkMode: 'theme-everon-a11y-dark-mode',
         readingGuide: 'theme-everon-a11y-reading-guide-on',
         stopAnimations: 'theme-everon-a11y-stop-animations',
         bigCursor: 'theme-everon-a11y-big-cursor'
@@ -66,6 +69,7 @@
     function applyState(state) {
         var html = document.documentElement;
         html.classList.add(HTML_CLASS);
+        html.classList.remove(LEGACY_DARK_CLASS);
         html.style.setProperty('--theme-everon-a11y-font-scale', String(state.fontSize / 100));
 
         Object.keys(CLASS_MAP).forEach(function(key) {
