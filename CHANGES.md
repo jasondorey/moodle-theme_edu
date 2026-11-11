@@ -6,6 +6,7 @@ Changes
 
 ### Rolling release
 
+* 2026-11-11 - Dashboard / Course overview / Timeline surfaces follow Boost `data-bs-theme="dark"` (Everon block + course-card tokens); keep light mode and navbar popovers unchanged (v5.3-r8)
 * 2026-11-11 - Accessibility Content Adjustments panel: force dark tile/header/font-bar paints under Boost `data-bs-theme="dark"` (button UA overrides); keep light mode and usermenu/Launch Pad unchanged (v5.3-r7)
 * 2026-11-11 - Navbar popovers (user menu tiles, Launch Pad, accessibility panel) follow Boost `data-bs-theme="dark"` via shared popover chrome tokens (v5.3-r6)
 * 2026-11-11 - Navbar utility icons match Moodle 5.3 outline weight: starred courses `i/star` → `i/star-o` (`fa-regular fa-star`); a11y + Launch Pad keep universal-access / location-crosshairs metaphors as outline SVGs (FA Free has no regular glyphs) (v5.3-r5)

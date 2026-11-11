@@ -1,11 +1,58 @@
 /**
  * Everon shared course card chrome (block_myoverview + block_recentlyaccessedcourses).
  * Used by My Courses and Dashboard layouts — dual-scoped to avoid drift.
+ *
+ * Light values stay as shipped. Dark mode remaps via Boost/Bootstrap
+ * colour-mode tokens under [data-bs-theme="dark"] (retired theme-everon-a11y-dark-mode path).
  */
 
 /* Shared block roots: Course overview + Recently accessed courses */
 /* stylelint-disable-next-line */
 /* :is() keeps selector lists compact while matching both blocks */
+
+body.theme-everon-mycourses,
+body.theme-everon-dashboard {
+    --everon-course-card-bg: #fff;
+    --everon-course-card-border: rgba(15, 23, 42, 0.08);
+    --everon-course-card-shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
+    --everon-course-card-hover-border: rgba(15, 23, 42, 0.14);
+    --everon-course-card-hover-shadow: 0 16px 36px rgba(15, 23, 42, 0.1);
+    --everon-course-card-img-bg: #e9eef5;
+    --everon-course-card-title: #111827;
+    --everon-course-card-muted: #6b7280;
+    --everon-course-card-fav-bg: rgba(255, 255, 255, 0.88);
+    --everon-course-card-fav-shadow: 0 2px 8px rgba(15, 23, 42, 0.12);
+    --everon-course-card-progress-disc: rgba(15, 23, 42, 0.78);
+    --everon-course-card-progress-track: rgba(255, 255, 255, 0.28);
+    --everon-course-card-progress-fill: #22a06b;
+    --everon-course-card-progress-shadow: 0 2px 10px rgba(15, 23, 42, 0.28);
+}
+
+:root[data-bs-theme="dark"] body.theme-everon-mycourses,
+:root[data-bs-theme="dark"] body.theme-everon-dashboard {
+    --everon-course-card-bg: var(--bs-body-bg, #212529);
+    --everon-course-card-border: var(--bs-border-color-translucent, rgba(255, 255, 255, 0.15));
+    --everon-course-card-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+    --everon-course-card-hover-border: var(--bs-border-color, rgba(255, 255, 255, 0.25));
+    --everon-course-card-hover-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+    --everon-course-card-img-bg: var(--bs-secondary-bg, #343a40);
+    --everon-course-card-title: var(--bs-body-color, #dee2e6);
+    --everon-course-card-muted: color-mix(
+        in srgb,
+        var(--bs-body-color, #dee2e6) 72%,
+        var(--bs-body-bg, #212529)
+    );
+    --everon-course-card-fav-bg: color-mix(
+        in srgb,
+        var(--bs-body-bg, #212529) 90%,
+        transparent
+    );
+    --everon-course-card-fav-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    --everon-course-card-progress-disc: rgba(0, 0, 0, 0.82);
+    --everon-course-card-progress-track: rgba(255, 255, 255, 0.22);
+    --everon-course-card-progress-fill: #3dd68c;
+    --everon-course-card-progress-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+}
 
 /* -------------------------------------------------------------------------
  * Card chrome
@@ -16,10 +63,10 @@ body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourse
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    background: #fff;
-    border: 1px solid rgba(15, 23, 42, 0.08);
+    background: var(--everon-course-card-bg);
+    border: 1px solid var(--everon-course-card-border);
     border-radius: 0.85rem;
-    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
+    box-shadow: var(--everon-course-card-shadow);
     container-type: inline-size;
     container-name: everon-course-card;
     transition:
@@ -82,8 +129,8 @@ body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourse
 body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card:hover,
 body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card:focus-within {
     transform: translateY(-3px);
-    border-color: rgba(15, 23, 42, 0.14);
-    box-shadow: 0 16px 36px rgba(15, 23, 42, 0.1);
+    border-color: var(--everon-course-card-hover-border);
+    box-shadow: var(--everon-course-card-hover-shadow);
 }
 
 body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card > a:first-child,
@@ -96,7 +143,7 @@ body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourse
     height: auto;
     aspect-ratio: 16 / 10;
     border-radius: 0;
-    background-color: #e9eef5;
+    background-color: var(--everon-course-card-img-bg);
 }
 
 /* Bootstrap .card-body { flex: 1 1 auto } grows under stretched grid cards,
@@ -123,7 +170,7 @@ body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourse
 body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card .coursename,
 body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card .coursename {
     font-weight: 650;
-    color: #111827;
+    color: var(--everon-course-card-title);
     text-decoration: none;
     margin-bottom: 0.15rem !important;
     line-height: 1.25;
@@ -143,7 +190,7 @@ body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourse
 body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card .text-muted,
 body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card .categoryname,
 body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card .text-muted {
-    color: #6b7280 !important;
+    color: var(--everon-course-card-muted) !important;
     font-size: 0.8125rem;
     line-height: 1.3;
 }
@@ -213,8 +260,8 @@ body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourse
     height: 1.85rem;
     margin: 0;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.88);
-    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.12);
+    background: var(--everon-course-card-fav-bg);
+    box-shadow: var(--everon-course-card-fav-shadow);
     line-height: 1;
 }
 
@@ -272,15 +319,15 @@ body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourse
     background:
         radial-gradient(
             closest-side,
-            rgba(15, 23, 42, 0.78) calc(100% - 2.75px),
+            var(--everon-course-card-progress-disc) calc(100% - 2.75px),
             transparent calc(100% - 2.25px)
         ),
         conic-gradient(
             from -90deg,
-            #22a06b 0 var(--everon-progress-angle),
-            rgba(255, 255, 255, 0.28) var(--everon-progress-angle) 100%
+            var(--everon-course-card-progress-fill) 0 var(--everon-progress-angle),
+            var(--everon-course-card-progress-track) var(--everon-progress-angle) 100%
         );
-    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.28);
+    box-shadow: var(--everon-course-card-progress-shadow);
     color: #fff;
 }
 
@@ -313,44 +360,5 @@ body.theme-everon-dashboard .block-myoverview .course-summaryitem {
     border-radius: 0.65rem;
 }
 
-/* -------------------------------------------------------------------------
- * Accessibility dark mode (Everon a11y toolbar)
- * ------------------------------------------------------------------------- */
-html.theme-everon-a11y-dark-mode body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card,
-html.theme-everon-a11y-dark-mode body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card {
-    background: #1e222a;
-    border-color: rgba(255, 255, 255, 0.1);
-    box-shadow: none;
-}
-
-html.theme-everon-a11y-dark-mode body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card .coursename,
-html.theme-everon-a11y-dark-mode body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card .coursename {
-    color: #e8eaed;
-}
-
-html.theme-everon-a11y-dark-mode body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card .categoryname,
-html.theme-everon-a11y-dark-mode body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card .text-muted,
-html.theme-everon-a11y-dark-mode body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card .categoryname,
-html.theme-everon-a11y-dark-mode body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card .text-muted {
-    color: #9aa0a6 !important;
-}
-
-html.theme-everon-a11y-dark-mode body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card [data-region="favourite-icon"],
-html.theme-everon-a11y-dark-mode body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card [data-region="favourite-icon"] {
-    background: rgba(30, 34, 42, 0.9);
-}
-
-html.theme-everon-a11y-dark-mode body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .theme-everon-mycourses-progress__circle,
-html.theme-everon-a11y-dark-mode body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .theme-everon-mycourses-progress__circle {
-    background:
-        radial-gradient(
-            closest-side,
-            rgba(0, 0, 0, 0.82) calc(100% - 2.75px),
-            transparent calc(100% - 2.25px)
-        ),
-        conic-gradient(
-            from -90deg,
-            #3dd68c 0 var(--everon-progress-angle),
-            rgba(255, 255, 255, 0.22) var(--everon-progress-angle) 100%
-        );
-}
+/* Dark paints for course cards live on the --everon-course-card-* tokens above
+ * under :root[data-bs-theme="dark"] (Boost colour modes). */
