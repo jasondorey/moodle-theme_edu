@@ -84,6 +84,7 @@
     border: 1px solid var(--everon-popover-tile-border, rgba(63, 68, 78, 0.12));
     border-radius: 0.5rem;
     background: var(--everon-popover-tile-bg, #fff);
+    color: var(--everon-popover-text, var(--cn-text, #3f444e));
     box-shadow: var(--everon-popover-tile-shadow, 0 1px 2px rgba(63, 68, 78, 0.06));
     grid-column: 1 / -1;
 }
@@ -115,6 +116,8 @@
     font-family: inherit;
     cursor: pointer;
     pointer-events: auto;
+    -webkit-appearance: none;
+    appearance: none;
 }
 
 .custom-navbar__a11y-step-btn {
@@ -127,6 +130,7 @@
     border: 1px solid var(--everon-popover-tile-border, rgba(63, 68, 78, 0.14));
     border-radius: 0.35rem;
     background: var(--everon-popover-tile-bg, #fff);
+    background-color: var(--everon-popover-tile-bg, #fff);
     color: var(--everon-popover-text, var(--cn-text, #3f444e));
     font-size: 1rem;
     line-height: 1;
@@ -154,6 +158,7 @@
     border: 1px solid var(--everon-popover-tile-border, rgba(63, 68, 78, 0.12));
     border-radius: 0.5rem;
     background: var(--everon-popover-tile-bg, #fff);
+    background-color: var(--everon-popover-tile-bg, #fff);
     color: var(--everon-popover-text, var(--cn-text, #3f444e));
     font-size: 0.625rem;
     font-weight: 600;
@@ -666,4 +671,94 @@ html.theme-everon-a11y-big-cursor * {
 #nav-accessibility-popover-container {
     --cn-a11y-accent: var(--everon-a11y-accent, var(--bs-primary, #0f6cbf));
     --everon-a11y-accent: var(--bs-primary, #0f6cbf);
+}
+
+/*
+ * Boost dark mode — a11y panel is mostly <button> tiles. Theme/UA button
+ * backgrounds can keep stark white even when shared popover tokens remap.
+ * Re-assert chrome on the panel and force tile paints under data-bs-theme=dark.
+ * Light mode unchanged. Usermenu / Launch Pad keep their own sheets.
+ */
+:root[data-bs-theme="dark"] #nav-accessibility-popover-container {
+    --everon-popover-bg: var(--bs-tertiary-bg, #2b3035);
+    --everon-popover-text: var(--bs-body-color, #dee2e6);
+    --everon-popover-muted: color-mix(
+        in srgb,
+        var(--bs-body-color, #dee2e6) 82%,
+        var(--bs-tertiary-bg, #2b3035)
+    );
+    --everon-popover-divider: var(--bs-border-color-translucent, rgba(255, 255, 255, 0.15));
+    --everon-popover-tile-bg: var(--bs-secondary-bg, #343a40);
+    --everon-popover-tile-border: var(--bs-border-color-translucent, rgba(255, 255, 255, 0.15));
+    --everon-popover-tile-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+    --everon-popover-tile-hover-bg: var(--bs-secondary-bg, #343a40);
+    --everon-popover-active-mix-base: var(--bs-secondary-bg, #343a40);
+}
+
+:root[data-bs-theme="dark"] #nav-accessibility-popover-container .custom-navbar__a11y-panel-inner {
+    background: var(--everon-popover-bg, #2b3035);
+    color: var(--everon-popover-text, #dee2e6);
+}
+
+:root[data-bs-theme="dark"] #nav-accessibility-popover-container h3.custom-navbar__a11y-section-title {
+    color: var(--everon-popover-muted, #c6cbd1);
+}
+
+:root[data-bs-theme="dark"] #nav-accessibility-popover-container .custom-navbar__a11y-font-card {
+    background: var(--everon-popover-tile-bg, #343a40) !important;
+    background-color: var(--everon-popover-tile-bg, #343a40) !important;
+    border-color: var(--everon-popover-tile-border, rgba(255, 255, 255, 0.15));
+    color: var(--everon-popover-text, #dee2e6) !important;
+    box-shadow: var(--everon-popover-tile-shadow, 0 1px 2px rgba(0, 0, 0, 0.35));
+}
+
+:root[data-bs-theme="dark"] #nav-accessibility-popover-container .custom-navbar__a11y-font-value {
+    color: var(--everon-popover-text, #dee2e6);
+}
+
+:root[data-bs-theme="dark"] #nav-accessibility-popover-container .custom-navbar__a11y-option,
+:root[data-bs-theme="dark"] #nav-accessibility-popover-container .custom-navbar__a11y-step-btn {
+    background: var(--everon-popover-tile-bg, #343a40) !important;
+    background-color: var(--everon-popover-tile-bg, #343a40) !important;
+    border-color: var(--everon-popover-tile-border, rgba(255, 255, 255, 0.15)) !important;
+    color: var(--everon-popover-text, #dee2e6) !important;
+    box-shadow: var(--everon-popover-tile-shadow, 0 1px 2px rgba(0, 0, 0, 0.35));
+}
+
+:root[data-bs-theme="dark"] #nav-accessibility-popover-container .custom-navbar__a11y-option .custom-navbar__a11y-option-icon,
+:root[data-bs-theme="dark"] #nav-accessibility-popover-container .custom-navbar__a11y-option .custom-navbar__a11y-option-label,
+:root[data-bs-theme="dark"] #nav-accessibility-popover-container .custom-navbar__a11y-font-card .custom-navbar__a11y-option-icon,
+:root[data-bs-theme="dark"] #nav-accessibility-popover-container .custom-navbar__a11y-font-card .custom-navbar__a11y-option-label {
+    color: inherit;
+}
+
+:root[data-bs-theme="dark"] #nav-accessibility-popover-container .custom-navbar__a11y-footer {
+    border-top-color: var(--everon-popover-divider, rgba(255, 255, 255, 0.15));
+}
+
+:root[data-bs-theme="dark"] #nav-accessibility-popover-container .custom-navbar__a11y-reset {
+    color: var(--everon-popover-muted, #c6cbd1);
+}
+
+/* Active / hover must beat the dark idle !important tile paints above. */
+:root[data-bs-theme="dark"] #nav-accessibility-popover-container .custom-navbar__a11y-option.is-active,
+:root[data-bs-theme="dark"] #nav-accessibility-popover-container .custom-navbar__a11y-option.custom-navbar__a11y-option--hover,
+:root[data-bs-theme="dark"] #nav-accessibility-popover-container .custom-navbar__a11y-option:hover,
+:root[data-bs-theme="dark"] #nav-accessibility-popover-container .custom-navbar__a11y-option:focus-visible,
+:root[data-bs-theme="dark"] #nav-accessibility-popover-container .custom-navbar__a11y-step-btn.custom-navbar__a11y-option--hover,
+:root[data-bs-theme="dark"] #nav-accessibility-popover-container .custom-navbar__a11y-step-btn:hover,
+:root[data-bs-theme="dark"] #nav-accessibility-popover-container .custom-navbar__a11y-step-btn:focus-visible {
+    border-color: var(--cn-a11y-accent) !important;
+    background: color-mix(
+        in srgb,
+        var(--cn-a11y-accent) 14%,
+        var(--everon-popover-active-mix-base, #343a40)
+    ) !important;
+    background-color: color-mix(
+        in srgb,
+        var(--cn-a11y-accent) 14%,
+        var(--everon-popover-active-mix-base, #343a40)
+    ) !important;
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--cn-a11y-accent) 55%, transparent) !important;
+    color: var(--cn-a11y-accent) !important;
 }
