@@ -1,6 +1,8 @@
 /**
  * Everon Focus Mode — wide content, hidden course tabs / drawers.
  * Ported from theme_custom (trimmed: no custom page-header chrome).
+ * Compiled into theme Extra SCSS (themerev) so dark FAB / notice paints cannot
+ * stick on a stale $page->requires->css() sheet. Layout JS fallback remains.
  */
 
 /* —— Fixed footer float stack (Union buttons + Focus FAB + help) ——
@@ -181,7 +183,9 @@ body.theme-everon-focus-mode #page-content {
     padding-top: 0.25rem;
 }
 
-/* On-screen hint while focus mode is active. */
+/* On-screen hint while focus mode is active.
+ * Light + dark both ride Boost colour-mode tokens (--bs-body-bg / --bs-body-color).
+ * Retired html.theme-everon-a11y-dark-mode override removed. */
 .theme-everon-focus-notice {
     margin: 0 0 1rem;
     padding: 0.65rem 1rem;
@@ -192,10 +196,4 @@ body.theme-everon-focus-mode #page-content {
     font-size: 0.875rem;
     font-weight: 500;
     text-align: center;
-}
-
-html.theme-everon-a11y-dark-mode .theme-everon-focus-notice {
-    background: color-mix(in srgb, var(--cn-primary, var(--bs-primary, #e67e22)) 14%, #1f2329);
-    border-color: rgba(255, 255, 255, 0.12);
-    color: #e8eaed;
 }
