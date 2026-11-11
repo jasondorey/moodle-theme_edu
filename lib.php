@@ -119,10 +119,11 @@ function theme_everon_get_extra_scss($theme) {
      * It will be added on top of Boost Union's SCSS code.
      *********************************************************/
 
-    // Course-card + dashboard block surfaces must compile into theme/styles.php (themerev).
-    // Previously they were only $page->requires->css() links with no revision, so browsers
-    // could keep a pre-dark-remap sheet that forced .block.card to #ffffff under Boost dark.
-    foreach (['course_cards.css', 'dashboard_surfaces.css'] as $sheet) {
+    // Course-card + dashboard block surfaces + My Courses stats must compile into
+    // theme/styles.php (themerev). Previously they were only $page->requires->css()
+    // links, so browsers could keep a pre-dark-remap sheet that forced white paints
+    // under Boost dark (retired theme-everon-a11y-dark-mode selectors).
+    foreach (['course_cards.css', 'dashboard_surfaces.css', 'my_courses_stats.css'] as $sheet) {
         $path = $CFG->dirroot . '/theme/everon/style/' . $sheet;
         if (is_readable($path)) {
             $scss .= "\n/* theme_everon/style/{$sheet} */\n" . file_get_contents($path);
@@ -271,7 +272,7 @@ function theme_everon_page_init(\moodle_page $page): void {
 
     if (theme_everon_mycourses_stats_should_offer($page)) {
         $page->add_body_class('theme-everon-mycourses-stats');
-        $page->requires->css(theme_everon_stylesheet_url('style/my_courses_stats.css'));
+        // my_courses_stats.css is compiled via theme_everon_get_extra_scss() (themerev).
     }
 
     if (theme_everon_dashboard_should_offer($page)) {

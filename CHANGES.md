@@ -6,6 +6,7 @@ Changes
 
 ### Rolling release
 
+* 2026-11-11 - Dark mode gaps: My Courses stats strip remaps under `:root[data-bs-theme="dark"]` and compiles via Extra SCSS; Focus FAB readable on dark; calendar cell borders use Everon dark token; keep light mode / navbar / dashboard surfaces (v5.3-r11)
 * 2026-11-11 - Dashboard dark surfaces: resolve raised paint via Moodle dark `--bs-white` / element `--bs-card-bg` (body cannot read `--bs-card-bg`); keep light mode unchanged (v5.3-r10)
 * 2026-11-11 - Dashboard Course overview / Timeline: compile surface + course-card CSS into theme Extra SCSS (themerev), direct dark `.block.card` / `.course-card` paints, cache-bust remaining style links; keep light mode and navbar popovers unchanged (v5.3-r9)
 * 2026-11-11 - Dashboard / Course overview / Timeline surfaces follow Boost `data-bs-theme="dark"` (Everon block + course-card tokens); keep light mode and navbar popovers unchanged (v5.3-r8)

@@ -103,6 +103,12 @@
     color: inherit;
 }
 
+/* Boost dark leaves utility .bg-secondary light; paint the FAB like remapped .btn-secondary. */
+:root[data-bs-theme="dark"] .btn-footer-everon-focus.bg-secondary {
+    background-color: var(--bs-secondary-bg, #343a40) !important;
+    color: var(--bs-body-color, #dee2e6) !important;
+}
+
 .theme-everon-focus-btn__icon {
     display: inline-flex;
     align-items: center;

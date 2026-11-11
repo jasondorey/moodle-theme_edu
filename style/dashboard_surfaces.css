@@ -114,10 +114,15 @@ body.theme-everon-dashboard .block_calendar_upcoming .content p {
     margin-top: 0.35rem !important;
 }
 
-/* Soften calendar chrome to match */
+/* Soften calendar chrome to match. Core/Boost keep #ced4da on cell borders;
+ * force Everon tokens (incl. dark translucent) onto every side. */
 body.theme-everon-dashboard .block_calendar_month .calendartable th,
 body.theme-everon-dashboard .block_calendar_month .calendartable td {
-    border-color: var(--everon-surface-calendar-border);
+    border-color: var(--everon-surface-calendar-border) !important;
+    border-top-color: var(--everon-surface-calendar-border) !important;
+    border-right-color: var(--everon-surface-calendar-border) !important;
+    border-bottom-color: var(--everon-surface-calendar-border) !important;
+    border-left-color: var(--everon-surface-calendar-border) !important;
 }
 
 body.theme-everon-dashboard .block_calendar_month .card-text a {

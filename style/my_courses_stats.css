@@ -1,7 +1,10 @@
 /*
  * Everon My Courses statistics strip.
- * Loaded only when enablemycoursesstats is Yes and pagelayout is mycourses.
+ * Compiled into theme Extra SCSS (themerev); scoped by body.theme-everon-mycourses-stats.
  * Keep separate from my_courses.css / course_cards.css.
+ *
+ * Light values stay as shipped. Dark mode remaps via Boost/Bootstrap
+ * colour-mode tokens under [data-bs-theme="dark"] (retired a11y-dark-mode path).
  */
 
 body.theme-everon-mycourses-stats .theme-everon-mycourses-stats {
@@ -121,10 +124,18 @@ body.theme-everon-mycourses-stats .theme-everon-mycourses-stats__divider {
     }
 }
 
-html.theme-everon-a11y-dark-mode body.theme-everon-mycourses-stats .theme-everon-mycourses-stats {
-    --theme-everon-stats-title: #e8eaed;
-    --theme-everon-stats-sub: #9aa0a6;
-    --theme-everon-stats-icon: #c4c7cc;
-    --theme-everon-stats-divider: rgba(232, 234, 237, 0.16);
+:root[data-bs-theme="dark"] body.theme-everon-mycourses-stats .theme-everon-mycourses-stats {
+    --theme-everon-stats-title: var(--bs-body-color, #dee2e6);
+    --theme-everon-stats-sub: color-mix(
+        in srgb,
+        var(--bs-body-color, #dee2e6) 75%,
+        var(--bs-body-bg, #212529)
+    );
+    --theme-everon-stats-icon: color-mix(
+        in srgb,
+        var(--bs-body-color, #dee2e6) 85%,
+        var(--bs-body-bg, #212529)
+    );
+    --theme-everon-stats-divider: var(--bs-border-color-translucent, rgba(255, 255, 255, 0.15));
     --theme-everon-stats-bg: transparent;
 }
