@@ -256,6 +256,10 @@ function theme_everon_page_init(\moodle_page $page): void {
         $page->requires->js_call_amd('theme_everon/navbar_accessibility', 'init');
     }
 
+    if (theme_everon_activity_icon_filters_enabled()) {
+        $page->requires->css(theme_everon_stylesheet_url('style/activity_icon_filters.css'));
+    }
+
     if (theme_everon_launchpad_should_show()) {
         $page->requires->css(theme_everon_stylesheet_url('style/launch_pad.css'));
         $page->requires->js_call_amd('theme_everon/launch_pad', 'init');

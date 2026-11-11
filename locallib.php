@@ -38,6 +38,50 @@ function theme_everon_accessibility_enabled(): bool {
 }
 
 /**
+ * Whether Everon activity icon filters are enabled (admin setting).
+ * Default: enabled when the setting has never been saved.
+ *
+ * @return bool
+ */
+function theme_everon_activity_icon_filters_enabled(): bool {
+    $value = get_config('theme_everon', 'enableactivityiconfilters');
+    if ($value === false || $value === null || $value === '') {
+        return true;
+    }
+    return $value === 'yes' || $value === '1' || $value === 1;
+}
+
+/**
+ * Hidden SVG filter defs for Safari purpose-colour activity icon tinting.
+ * Matrix values match Boost `$activity-icon-*-bg` / `recolor-icon` (icons.scss).
+ *
+ * @return string
+ */
+function theme_everon_get_activity_icon_filters_svg(): string {
+    // Boost purpose colours → feColorMatrix fifth-column RGB (component / 255).
+    $filters = [
+        'administration' => '0 0 0 0 0.8549019608 0 0 0 0 0.3450980392 0 0 0 0 0.937254902 0 0 0 1 0',
+        'assessment' => '0 0 0 0 0.9764705882 0 0 0 0 0 0 0 0 0 0.5254901961 0 0 0 1 0',
+        'collaboration' => '0 0 0 0 0.3568627451 0 0 0 0 0.2509803922 0 0 0 0 1 0 0 0 1 0',
+        'communication' => '0 0 0 0 0.9215686275 0 0 0 0 0.3843137255 0 0 0 0 0 0 0 0 1 0',
+        'content' => '0 0 0 0 0 0 0 0 0 0.6 0 0 0 0 0.6784313725 0 0 0 1 0',
+        'interactivecontent' => '0 0 0 0 0.5529411765 0 0 0 0 0.2392156863 0 0 0 0 0.1058823529 0 0 0 1 0',
+    ];
+
+    $inner = '';
+    foreach ($filters as $purpose => $matrix) {
+        $id = 'safari-activity-' . $purpose;
+        $inner .= '<filter id="' . $id . '" color-interpolation-filters="sRGB">'
+            . '<feColorMatrix type="matrix" values="' . $matrix . '"/>'
+            . '</filter>';
+    }
+
+    return '<svg xmlns="http://www.w3.org/2000/svg" id="theme-everon-activity-icon-filters" '
+        . 'width="0" height="0" style="position:absolute;width:0;height:0;overflow:hidden" '
+        . 'aria-hidden="true" focusable="false"><defs>' . $inner . '</defs></svg>';
+}
+
+/**
  * Inline head markup: apply stored a11y settings before first paint.
  * Ported from theme_custom (GPL).
  *

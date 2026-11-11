@@ -6,6 +6,7 @@ Changes
 
 ### Rolling release
 
+* 2026-11-11 - Activity icon filters: Accessibility setting (default On) loads Safari purpose-colour SVG filters + dark-mode light monologo filters; branded/`aimassign` excluded (v5.3-r14)
 * 2026-11-11 - Behat dark-mode smoke: Dashboard, My courses, course page, and navbar popovers (usermenu / Launch Pad / a11y) under Boost `data-bs-theme=dark`; a11y Dark Mode tile bridge assertion (v5.3-r13)
 * 2026-11-11 - Finish Boost colour-mode cleanup: Focus Mode CSS via Extra SCSS (themerev); drop dead `theme-everon-a11y-dark-mode` focus-notice rule; remove `bg-white` from recently accessed course-card footer; keep light mode (v5.3-r12)
 * 2026-11-11 - Dark mode gaps: My Courses stats strip remaps under `:root[data-bs-theme="dark"]` and compiles via Extra SCSS; Focus FAB readable on dark; calendar cell borders use Everon dark token; keep light mode / navbar / dashboard surfaces (v5.3-r11)

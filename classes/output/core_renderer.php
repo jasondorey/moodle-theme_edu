@@ -78,6 +78,10 @@ class core_renderer extends \theme_boost_union\output\core_renderer {
         if (\theme_everon_focusmode_enabled()) {
             $output .= \theme_everon_get_focusmode_boot_html();
         }
+        // Safari purpose-colour filters reference page-local SVG defs (data-URI filters fail there).
+        if (\theme_everon_activity_icon_filters_enabled()) {
+            $output .= \theme_everon_get_activity_icon_filters_svg();
+        }
         $output .= parent::standard_head_html();
         return $output;
     }

@@ -162,6 +162,26 @@ if ($hassiteconfig || has_capability('theme/boost_union:configure', context_syst
         $setting->set_updatedcallback('theme_reset_all_caches');
         $tab->add($setting);
 
+        // Activity icon filters (Safari purpose colours + dark-mode monologo invert).
+        $name = 'theme_everon/activityiconfiltersheading';
+        $title = get_string('activityiconfiltersheading', 'theme_everon', null, true);
+        $description = get_string('activityiconfiltersheading_desc', 'theme_everon', null, true);
+        $setting = new admin_setting_heading($name, $title, $description);
+        $tab->add($setting);
+
+        $name = 'theme_everon/enableactivityiconfilters';
+        $title = get_string('enableactivityiconfilters', 'theme_everon', null, true);
+        $description = get_string('enableactivityiconfilters_desc', 'theme_everon', null, true);
+        $setting = new admin_setting_configselect(
+            $name,
+            $title,
+            $description,
+            THEME_BOOST_UNION_SETTING_SELECT_YES,
+            $yesnooption
+        );
+        $setting->set_updatedcallback('theme_reset_all_caches');
+        $tab->add($setting);
+
         $page->add($tab);
 
         // Launch Pad (role-aware navbar shortcuts).

@@ -1,0 +1,73 @@
+/* theme_everon — Activity icon filters (gated by enableactivityiconfilters).
+ *
+ * 1) Safari: purpose-colour tint via page SVG defs (#safari-activity-*).
+ * 2) Dark mode: light/white monologo / file icons (do not rely on purpose colours alone).
+ * Branded icons stay unfiltered. aimassign monologos are excluded from tinting.
+ */
+
+/* Safari only — tint core monologos + file icons. */
+@supports (font: -apple-system-body) {
+    .activityiconcontainer:not(.isbranded) {
+        background-color: transparent !important;
+    }
+
+    .activityiconcontainer.isbranded .activityicon,
+    .activityiconcontainer.isbranded .icon {
+        filter: none !important;
+    }
+
+    .activityiconcontainer.administration:not(.isbranded) .activityicon:not(.nofilter)[src*="monologo"]:not([src*="aimassign"]),
+    .activityiconcontainer.administration:not(.isbranded) .activityicon:not(.nofilter)[src*="/f/"],
+    .activityiconcontainer.administration:not(.isbranded) .icon:not(.nofilter)[src*="monologo"]:not([src*="aimassign"]),
+    .activityiconcontainer.administration:not(.isbranded) .icon:not(.nofilter)[src*="/f/"] {
+        filter: url(#safari-activity-administration) !important;
+    }
+
+    .activityiconcontainer.assessment:not(.isbranded) .activityicon:not(.nofilter)[src*="monologo"]:not([src*="aimassign"]),
+    .activityiconcontainer.assessment:not(.isbranded) .activityicon:not(.nofilter)[src*="/f/"],
+    .activityiconcontainer.assessment:not(.isbranded) .icon:not(.nofilter)[src*="monologo"]:not([src*="aimassign"]),
+    .activityiconcontainer.assessment:not(.isbranded) .icon:not(.nofilter)[src*="/f/"] {
+        filter: url(#safari-activity-assessment) !important;
+    }
+
+    .activityiconcontainer.collaboration:not(.isbranded) .activityicon:not(.nofilter)[src*="monologo"]:not([src*="aimassign"]),
+    .activityiconcontainer.collaboration:not(.isbranded) .activityicon:not(.nofilter)[src*="/f/"],
+    .activityiconcontainer.collaboration:not(.isbranded) .icon:not(.nofilter)[src*="monologo"]:not([src*="aimassign"]),
+    .activityiconcontainer.collaboration:not(.isbranded) .icon:not(.nofilter)[src*="/f/"] {
+        filter: url(#safari-activity-collaboration) !important;
+    }
+
+    .activityiconcontainer.communication:not(.isbranded) .activityicon:not(.nofilter)[src*="monologo"]:not([src*="aimassign"]),
+    .activityiconcontainer.communication:not(.isbranded) .activityicon:not(.nofilter)[src*="/f/"],
+    .activityiconcontainer.communication:not(.isbranded) .icon:not(.nofilter)[src*="monologo"]:not([src*="aimassign"]),
+    .activityiconcontainer.communication:not(.isbranded) .icon:not(.nofilter)[src*="/f/"] {
+        filter: url(#safari-activity-communication) !important;
+    }
+
+    .activityiconcontainer.content:not(.isbranded) .activityicon:not(.nofilter)[src*="monologo"]:not([src*="aimassign"]),
+    .activityiconcontainer.content:not(.isbranded) .activityicon:not(.nofilter)[src*="/f/"],
+    .activityiconcontainer.content:not(.isbranded) .icon:not(.nofilter)[src*="monologo"]:not([src*="aimassign"]),
+    .activityiconcontainer.content:not(.isbranded) .icon:not(.nofilter)[src*="/f/"] {
+        filter: url(#safari-activity-content) !important;
+    }
+
+    .activityiconcontainer.interactivecontent:not(.isbranded) .activityicon:not(.nofilter)[src*="monologo"]:not([src*="aimassign"]),
+    .activityiconcontainer.interactivecontent:not(.isbranded) .activityicon:not(.nofilter)[src*="/f/"],
+    .activityiconcontainer.interactivecontent:not(.isbranded) .icon:not(.nofilter)[src*="monologo"]:not([src*="aimassign"]),
+    .activityiconcontainer.interactivecontent:not(.isbranded) .icon:not(.nofilter)[src*="/f/"] {
+        filter: url(#safari-activity-interactivecontent) !important;
+    }
+}
+
+/* Dark mode — light/white monologos and file icons on dark surfaces. */
+:root[data-bs-theme="dark"] .activityiconcontainer.isbranded .activityicon,
+:root[data-bs-theme="dark"] .activityiconcontainer.isbranded .icon {
+    filter: none !important;
+}
+
+:root[data-bs-theme="dark"] .activityiconcontainer:not(.isbranded) .activityicon:not(.nofilter)[src*="monologo"]:not([src*="aimassign"]),
+:root[data-bs-theme="dark"] .activityiconcontainer:not(.isbranded) .activityicon:not(.nofilter)[src*="/f/"],
+:root[data-bs-theme="dark"] .activityiconcontainer:not(.isbranded) .icon:not(.nofilter)[src*="monologo"]:not([src*="aimassign"]),
+:root[data-bs-theme="dark"] .activityiconcontainer:not(.isbranded) .icon:not(.nofilter)[src*="/f/"] {
+    filter: brightness(0) invert(1) !important;
+}
