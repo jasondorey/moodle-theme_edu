@@ -61,8 +61,16 @@ body.theme-everon-compact-navbar #usernavigation .usermenu .dropdown-toggle {
 }
 
 /* Soft grouping: Launch Pad sits closer to a11y in the utility cluster */
-body.theme-everon-compact-navbar #usernavigation .fa-location-crosshairs {
+body.theme-everon-compact-navbar #usernavigation .everon-launchpad__toggle-icon {
     margin-inline-start: -0.1rem;
+}
+
+/* Outline SVGs sized like FA navbar icons (fa-regular visual weight). */
+#usernavigation .everon-navbar-icon-svg {
+    width: 1.2rem;
+    height: 1.2rem;
+    display: block;
+    flex-shrink: 0;
 }
 
 /* Edit-mode toggle: slightly denser */

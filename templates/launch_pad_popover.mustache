@@ -20,7 +20,18 @@
         title="{{#str}} launchpadmenu, theme_everon {{/str}}"
         aria-label="{{#str}} launchpadmenu, theme_everon {{/str}}"
     >
-        <i class="icon fa fa-location-crosshairs fa-fw" aria-hidden="true"></i>
+        {{!
+            Match Moodle 5.3 navbar outline weight (fa-regular), same as bell/message.
+            FA Free has no regular location-crosshairs glyph, so keep the launch/target
+            metaphor as an outline SVG at comparable stroke weight.
+        }}
+        <svg class="icon fa-fw everon-navbar-icon-svg everon-launchpad__toggle-icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false">
+            <g fill="none" stroke="currentColor" stroke-width="32" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="256" cy="256" r="112"></circle>
+                <circle cx="256" cy="256" r="40"></circle>
+                <path d="M256 48v80M256 384v80M48 256h80M384 256h80"></path>
+            </g>
+        </svg>
     </div>
     <div
         id="nav-launchpad-popover-panel"
