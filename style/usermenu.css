@@ -88,7 +88,7 @@
         --everon-popover-item-hover-border,
         color-mix(in srgb, var(--everon-popover-accent) 40%, transparent)
     ) !important;
-    background: #fff !important;
+    background: var(--everon-popover-tile-hover-bg, #fff) !important;
     color: var(--everon-popover-accent) !important;
     outline: none;
     text-decoration: none;
