@@ -21,7 +21,20 @@
         aria-label="{{#str}} accessibilitymenu, theme_everon {{/str}}"
     >
         <span class="custom-navbar__cluster-disc" aria-hidden="true">
-            <i class="icon fa fa-universal-access fa-fw" aria-hidden="true"></i>
+            {{!
+                Match Moodle 5.3 navbar outline weight (fa-regular), same as bell/message.
+                FA Free has no regular universal-access glyph, so keep the person-in-circle
+                metaphor as an outline SVG at comparable stroke weight.
+            }}
+            <svg class="icon fa-fw everon-navbar-icon-svg" viewBox="0 0 512 512" aria-hidden="true" focusable="false">
+                <g fill="none" stroke="currentColor" stroke-width="32" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="256" cy="256" r="208"></circle>
+                    <circle cx="256" cy="148" r="28" fill="currentColor" stroke="none"></circle>
+                    <path d="M152 214h208"></path>
+                    <path d="M256 230v88"></path>
+                    <path d="M188 420l68-102 68 102"></path>
+                </g>
+            </svg>
         </span>
     </div>
     <div
