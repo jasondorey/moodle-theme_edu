@@ -31,8 +31,8 @@ body.theme-everon-dashboard {
 
 :root[data-bs-theme="dark"] body.theme-everon-mycourses,
 :root[data-bs-theme="dark"] body.theme-everon-dashboard {
-    /* Raised card surface — same token Boost .card uses under colour modes. */
-    --everon-course-card-bg: var(--bs-card-bg, var(--bs-body-bg, #212529));
+    /* Raised surface via Moodle dark --bs-white remap (readable from body). */
+    --everon-course-card-bg: var(--bs-white, var(--bs-secondary-bg, #343a40));
     --everon-course-card-border: var(--bs-border-color-translucent, rgba(255, 255, 255, 0.15));
     --everon-course-card-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
     --everon-course-card-hover-border: var(--bs-border-color, rgba(255, 255, 255, 0.25));
@@ -46,7 +46,7 @@ body.theme-everon-dashboard {
     );
     --everon-course-card-fav-bg: color-mix(
         in srgb,
-        var(--bs-card-bg, var(--bs-body-bg, #212529)) 90%,
+        var(--bs-white, var(--bs-secondary-bg, #343a40)) 90%,
         transparent
     );
     --everon-course-card-fav-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
@@ -80,7 +80,7 @@ body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourse
 
 :root[data-bs-theme="dark"] body.theme-everon-mycourses :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card,
 :root[data-bs-theme="dark"] body.theme-everon-dashboard :is(.block-myoverview, .block-recentlyaccessedcourses) .course-card {
-    background-color: var(--everon-course-card-bg) !important;
+    background-color: var(--everon-course-card-bg, var(--bs-card-bg, #343a40)) !important;
     background-image: none !important;
 }
 
