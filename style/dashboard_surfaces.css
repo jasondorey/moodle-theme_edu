@@ -1,10 +1,14 @@
 /**
  * Everon Dashboard supporting surfaces — unify blocks with course-card language.
- * Loaded with Dashboard layout (enabledashboardlayout). Body: theme-everon-dashboard.
+ * Compiled into theme Extra SCSS (themerev) and scoped by body.theme-everon-dashboard.
  * Tokens align with course_cards.css / popover_chrome.css.
  *
  * Light values stay as shipped. Dark mode remaps via Boost/Bootstrap
  * colour-mode tokens under [data-bs-theme="dark"] (no parallel Everon dark system).
+ *
+ * Important: Everon paints .block.card with --everon-surface-bg. That overrides Boost's
+ * dark-aware .card { background-color: var(--bs-card-bg) }. Dark remaps must therefore
+ * ship in the compiled theme CSS (not only unversioned /style/*.css links).
  */
 
 body.theme-everon-dashboard {
@@ -17,9 +21,9 @@ body.theme-everon-dashboard {
     --everon-surface-calendar-border: rgba(15, 23, 42, 0.06);
 }
 
-/* Boost colour modes — block surfaces follow site dark/light. */
+/* Boost colour modes — raised card surface, not page body (matches Boost .card). */
 :root[data-bs-theme="dark"] body.theme-everon-dashboard {
-    --everon-surface-bg: var(--bs-body-bg, #212529);
+    --everon-surface-bg: var(--bs-card-bg, var(--bs-body-bg, #212529));
     --everon-surface-border: 1px solid var(--bs-border-color-translucent, rgba(255, 255, 255, 0.15));
     --everon-surface-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
     --everon-surface-title: var(--bs-body-color, #dee2e6);
@@ -35,11 +39,20 @@ body.theme-everon-dashboard {
 body.theme-everon-dashboard #region-main .block.card,
 body.theme-everon-dashboard #theme-block-region-outside-right .block.card,
 body.theme-everon-dashboard #theme-block-region-outside-left .block.card {
-    background: var(--everon-surface-bg);
+    background-color: var(--everon-surface-bg);
+    background-image: none;
     border: var(--everon-surface-border) !important;
     border-radius: var(--everon-surface-radius) !important;
     box-shadow: var(--everon-surface-shadow);
     overflow: hidden;
+}
+
+/* Direct dark paints — win over Boost .card background-color and any stale sheet. */
+:root[data-bs-theme="dark"] body.theme-everon-dashboard #region-main .block.card,
+:root[data-bs-theme="dark"] body.theme-everon-dashboard #theme-block-region-outside-right .block.card,
+:root[data-bs-theme="dark"] body.theme-everon-dashboard #theme-block-region-outside-left .block.card {
+    background-color: var(--everon-surface-bg) !important;
+    background-image: none !important;
 }
 
 body.theme-everon-dashboard #region-main .block .card-title,

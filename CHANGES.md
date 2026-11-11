@@ -6,6 +6,7 @@ Changes
 
 ### Rolling release
 
+* 2026-11-11 - Dashboard Course overview / Timeline: compile surface + course-card CSS into theme Extra SCSS (themerev), paint dark `.block.card` / `.course-card` with raised `--bs-card-bg`, cache-bust remaining style links; keep light mode and navbar popovers unchanged (v5.3-r9)
 * 2026-11-11 - Dashboard / Course overview / Timeline surfaces follow Boost `data-bs-theme="dark"` (Everon block + course-card tokens); keep light mode and navbar popovers unchanged (v5.3-r8)
 * 2026-11-11 - Accessibility Content Adjustments panel: force dark tile/header/font-bar paints under Boost `data-bs-theme="dark"` (button UA overrides); keep light mode and usermenu/Launch Pad unchanged (v5.3-r7)
 * 2026-11-11 - Navbar popovers (user menu tiles, Launch Pad, accessibility panel) follow Boost `data-bs-theme="dark"` via shared popover chrome tokens (v5.3-r6)

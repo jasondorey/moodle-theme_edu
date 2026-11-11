@@ -119,7 +119,47 @@ function theme_everon_get_extra_scss($theme) {
      * It will be added on top of Boost Union's SCSS code.
      *********************************************************/
 
+    // Course-card + dashboard block surfaces must compile into theme/styles.php (themerev).
+    // Previously they were only $page->requires->css() links with no revision, so browsers
+    // could keep a pre-dark-remap sheet that forced .block.card to #ffffff under Boost dark.
+    foreach (['course_cards.css', 'dashboard_surfaces.css'] as $sheet) {
+        $path = $CFG->dirroot . '/theme/everon/style/' . $sheet;
+        if (is_readable($path)) {
+            $scss .= "\n/* theme_everon/style/{$sheet} */\n" . file_get_contents($path);
+        }
+    }
+
     return $scss;
+}
+
+/**
+ * Plugin version string used to cache-bust standalone Everon stylesheets.
+ *
+ * @return string
+ */
+function theme_everon_stylesheet_rev(): string {
+    global $CFG;
+
+    static $rev = null;
+    if ($rev !== null) {
+        return $rev;
+    }
+
+    $plugin = new stdClass();
+    include($CFG->dirroot . '/theme/everon/version.php');
+    $rev = (string) $plugin->version;
+    return $rev;
+}
+
+/**
+ * Theme-relative stylesheet URL with plugin version query for cache busting.
+ *
+ * @param string $relativepath Path under /theme/everon/ (e.g. style/dashboard.css).
+ * @return \core\url
+ */
+function theme_everon_stylesheet_url(string $relativepath): \core\url {
+    $relativepath = ltrim($relativepath, '/');
+    return new \core\url('/theme/everon/' . $relativepath, ['rev' => theme_everon_stylesheet_rev()]);
 }
 
 /**
@@ -190,11 +230,11 @@ function theme_everon_page_init(\moodle_page $page): void {
 
     // Shared popover chrome + profile usermenu — always on with Everon (not login).
     if ($page->pagelayout !== 'login') {
-        $page->requires->css($www . '/style/popover_chrome.css');
-        $page->requires->css($www . '/style/usermenu.css');
+        $page->requires->css(theme_everon_stylesheet_url('style/popover_chrome.css'));
+        $page->requires->css(theme_everon_stylesheet_url('style/usermenu.css'));
         if (theme_everon_usermenutiles_enabled()) {
             $page->add_body_class('theme-everon-usermenu-tiles');
-            $page->requires->css($www . '/style/usermenu_tiles.css');
+            $page->requires->css(theme_everon_stylesheet_url('style/usermenu_tiles.css'));
         }
     }
 
@@ -205,45 +245,43 @@ function theme_everon_page_init(\moodle_page $page): void {
 
     if (theme_everon_accessibility_enabled()) {
         // Fonts must load outside theme/styles.php so relative @font-face URLs resolve.
-        $page->requires->css($www . '/fonts/opendyslexic.css');
-        $page->requires->css($www . '/style/accessibility.css');
+        $page->requires->css(theme_everon_stylesheet_url('fonts/opendyslexic.css'));
+        $page->requires->css(theme_everon_stylesheet_url('style/accessibility.css'));
         $page->requires->js_call_amd('theme_everon/navbar_accessibility', 'init');
     }
 
     if (theme_everon_launchpad_should_show()) {
-        $page->requires->css($www . '/style/launch_pad.css');
+        $page->requires->css(theme_everon_stylesheet_url('style/launch_pad.css'));
         $page->requires->js_call_amd('theme_everon/launch_pad', 'init');
     }
 
     if (\theme_everon\focus_mode::should_offer($page)) {
         $courseid = \theme_everon\focus_mode::resolve_course_id($page);
         $page->add_body_class('theme-everon-focus-available');
-        $page->requires->css($www . '/style/course_focus.css');
+        $page->requires->css(theme_everon_stylesheet_url('style/course_focus.css'));
         $page->requires->js($www . '/javascript/course_focus_styles.js');
         $page->requires->js_call_amd('theme_everon/course_focus', 'init', [$courseid]);
     }
 
     if (theme_everon_mycourses_should_offer($page)) {
         $page->add_body_class('theme-everon-mycourses');
-        $page->requires->css($www . '/style/course_cards.css');
-        $page->requires->css($www . '/style/my_courses.css');
+        // course_cards.css is compiled via theme_everon_get_extra_scss() (themerev).
+        $page->requires->css(theme_everon_stylesheet_url('style/my_courses.css'));
     }
 
     if (theme_everon_mycourses_stats_should_offer($page)) {
         $page->add_body_class('theme-everon-mycourses-stats');
-        $page->requires->css($www . '/style/my_courses_stats.css');
+        $page->requires->css(theme_everon_stylesheet_url('style/my_courses_stats.css'));
     }
 
     if (theme_everon_dashboard_should_offer($page)) {
         $page->add_body_class('theme-everon-dashboard');
-        $page->requires->css($www . '/style/course_cards.css');
-        $page->requires->css($www . '/style/dashboard.css');
-        // Supporting block surfaces + empty-state polish fold into Dashboard layout.
-        $page->requires->css($www . '/style/dashboard_surfaces.css');
+        // course_cards.css + dashboard_surfaces.css compile via Extra SCSS (themerev).
+        $page->requires->css(theme_everon_stylesheet_url('style/dashboard.css'));
     }
 
     if (theme_everon_compact_navbar_should_offer($page)) {
         $page->add_body_class('theme-everon-compact-navbar');
-        $page->requires->css($www . '/style/navbar.css');
+        $page->requires->css(theme_everon_stylesheet_url('style/navbar.css'));
     }
 }
