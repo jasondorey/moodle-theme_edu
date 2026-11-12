@@ -15,13 +15,15 @@
     width: 22.5rem !important;
     max-width: min(22.5rem, calc(100vw - 1.5rem)) !important;
     max-height: min(85vh, 40rem) !important;
-    height: auto !important;
     border-radius: 0.75rem;
     overflow: hidden !important;
     pointer-events: auto !important;
 }
 
+/* Height auto only while open — never pin height when collapsed (that blocked
+ * Boost's height→0 path and left opacity delayed ~250ms after the caret). */
 #nav-accessibility-popover-container:not(.collapsed) .popover-region-container {
+    display: block;
     visibility: visible !important;
     opacity: 1 !important;
     height: auto !important;
@@ -30,16 +32,18 @@
     pointer-events: auto !important;
 }
 
-/* Collapsed: hide immediately. Everon keeps height:auto when open, which
- * blocks Boost's height→0 + delayed opacity/visibility choreography and
- * left the panel full-size for ~250ms after the caret vanished. */
+/* Collapsed: match Launch Pad — display:none so Boost's delayed
+ * opacity/visibility transition cannot paint a full-size linger. */
 #nav-accessibility-popover-container.collapsed .popover-region-container {
+    display: none !important;
     pointer-events: none !important;
     opacity: 0 !important;
     visibility: hidden !important;
     height: 0 !important;
     max-height: 0 !important;
     overflow: hidden !important;
+    border: 0 !important;
+    box-shadow: none !important;
     transition: none !important;
 }
 
