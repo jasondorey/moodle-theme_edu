@@ -19,12 +19,13 @@
 
     Everon override of core/user_action_menu_items (from Boost Union).
 
-    When everontiles is set (theme_everon/enableusermenutiles): 3-column tile grid
-    matching Launch Pad. Dividers are omitted. Same destinations as Boost.
+    When everontiles is set (theme_everon/enableusermenutiles): panel title plus
+    3-column tile grid matching Launch Pad. Dividers are omitted. Same destinations as Boost.
 
     When everontiles is unset/false: Union vertical list markup.
 }}
 {{#everontiles}}
+<h3 class="everon-usermenu__title">{{#str}} usermenumenu, theme_everon {{/str}}</h3>
 <div class="everon-usermenu__grid" role="none">
 {{#items}}
     {{#link}}

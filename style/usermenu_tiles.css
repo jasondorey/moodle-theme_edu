@@ -20,6 +20,16 @@ body.theme-everon-usermenu-tiles .usermenu #user-action-menu #carousel-item-main
     padding: 0;
 }
 
+/* Match Launch Pad / a11y section title chrome at the top of the panel. */
+body.theme-everon-usermenu-tiles .everon-usermenu__title {
+    margin: 0 0 0.5rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--everon-popover-muted, rgba(63, 68, 78, 0.72));
+    letter-spacing: 0;
+    text-transform: none;
+}
+
 body.theme-everon-usermenu-tiles .everon-usermenu__grid {
     display: grid !important;
     grid-template-columns: repeat(3, minmax(0, 1fr)) !important;

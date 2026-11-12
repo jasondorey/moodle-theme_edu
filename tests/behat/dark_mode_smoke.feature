@@ -40,6 +40,8 @@ Feature: Everon dark mode smoke under Boost colour modes
     Then the document Bootstrap colour mode should be "dark"
     When I open the Everon user menu
     Then "#user-action-menu" "css_element" should be visible
+    And ".everon-usermenu__title" "css_element" should exist
+    And I should see "User menu" in the "#user-action-menu" "css_element"
     And ".everon-usermenu__grid" "css_element" should exist
     When I open the Everon launch pad
     Then "#nav-launchpad-popover-panel" "css_element" should be visible

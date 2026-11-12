@@ -135,6 +135,7 @@ $string['usermenuheading'] = 'User menu tiles';
 $string['usermenuheading_desc'] = 'Restyle the profile usermenu as a Launch Pad–style tile grid (same Boost destinations). Panel chrome already matches Accessibility / Launch Pad. Turn off to keep the vertical link list.';
 $string['enableusermenutiles'] = 'Enable user menu tiles';
 $string['enableusermenutiles_desc'] = 'Show profile usermenu items as a 3-column tile grid with Font Awesome icons. Default: Yes. Set to No for the vertical list.';
+$string['usermenumenu'] = 'User menu';
 
 // Settings: Compact navbar tab.
 $string['navbartab'] = 'Navbar';
