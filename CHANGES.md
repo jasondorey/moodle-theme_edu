@@ -6,6 +6,7 @@ Changes
 
 ### Rolling release
 
+* 2026-11-12 - Accessibility panel: hide immediately on close (override Boost delayed opacity/visibility while height stays auto) so caret and panel collapse together (v5.3-r16)
 * 2026-11-12 - User menu tiles panel: add "User menu" title above the tile grid to match Launch Pad / a11y section titles (v5.3-r15)
 * 2026-11-11 - Activity icon filters: Accessibility setting (default On) loads Safari purpose-colour SVG filters + dark-mode light monologo filters; branded/`aimassign` excluded (v5.3-r14)
 * 2026-11-11 - Behat dark-mode smoke: Dashboard, My courses, course page, and navbar popovers (usermenu / Launch Pad / a11y) under Boost `data-bs-theme=dark`; a11y Dark Mode tile bridge assertion (v5.3-r13)

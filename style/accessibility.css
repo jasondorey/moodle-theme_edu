@@ -30,8 +30,17 @@
     pointer-events: auto !important;
 }
 
+/* Collapsed: hide immediately. Everon keeps height:auto when open, which
+ * blocks Boost's height→0 + delayed opacity/visibility choreography and
+ * left the panel full-size for ~250ms after the caret vanished. */
 #nav-accessibility-popover-container.collapsed .popover-region-container {
     pointer-events: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: none !important;
 }
 
 #nav-accessibility-popover-container .popover-region-container {
