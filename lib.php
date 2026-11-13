@@ -135,6 +135,16 @@ function theme_everon_get_extra_scss($theme) {
         }
     }
 
+    // MuTMS surface CSS + tenant Boost background images (when compatibility is on).
+    require_once($CFG->dirroot . '/theme/everon/locallib.php');
+    if (theme_everon_mutms_compatibility_enabled()) {
+        $mutmscss = $CFG->dirroot . '/theme/everon/style/mutms.css';
+        if (is_readable($mutmscss)) {
+            $scss .= "\n/* theme_everon/style/mutms.css */\n" . file_get_contents($mutmscss);
+        }
+        $scss .= \theme_everon\local\mutms::background_scss();
+    }
+
     return $scss;
 }
 
@@ -293,5 +303,10 @@ function theme_everon_page_init(\moodle_page $page): void {
     if (theme_everon_compact_navbar_should_offer($page)) {
         $page->add_body_class('theme-everon-compact-navbar');
         $page->requires->css(theme_everon_stylesheet_url('style/navbar.css'));
+    }
+
+    if (theme_everon_mutms_compatibility_enabled()) {
+        $page->add_body_class('theme-everon-mutms');
+        // mutms.css is compiled via theme_everon_get_extra_scss() (themerev).
     }
 }

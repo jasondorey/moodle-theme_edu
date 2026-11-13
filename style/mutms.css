@@ -1,0 +1,100 @@
+/**
+ * MuTMS compatibility styles for theme Everon.
+ *
+ * Loaded only when Site administration → Appearance → Everon → MuTMS
+ * → Enable MuTMS compatibility is Yes. Prefer Bootstrap colour-mode tokens
+ * so plugin surfaces follow Boost dark/light (Everon a11y panel).
+ */
+
+/* -------------------------------------------------------------------------
+ * Shared body marker
+ * ------------------------------------------------------------------------- */
+body.theme-everon-mutms {
+    --everon-mutms-surface: var(--bs-body-bg);
+    --everon-mutms-border: var(--bs-border-color);
+}
+
+/* -------------------------------------------------------------------------
+ * tool_muhome — custom home pages use mydashboard + content region.
+ * Keep the content region full-width friendly; do not force /my/ chrome.
+ * ------------------------------------------------------------------------- */
+body.theme-everon-mutms.path-admin-tool-muhome #region-main,
+body.theme-everon-mutms.pagelayout-mydashboard.pagetype-tool-muhome-index #region-main {
+    max-width: none;
+}
+
+body.theme-everon-mutms.pagetype-tool-muhome-index #region-main [data-region="content"],
+body.theme-everon-mutms.pagetype-tool-muhome-index .block-region[data-blockregion="content"] {
+    width: 100%;
+}
+
+/* -------------------------------------------------------------------------
+ * Programs / certifications / catalogue learner pages
+ * ------------------------------------------------------------------------- */
+body.theme-everon-mutms.path-admin-tool-muprog #program_content a.movehere,
+body.theme-everon-mutms.path-admin-tool-muprog a.movehere {
+    border-color: var(--bs-secondary-color, #343a40) !important;
+}
+
+body.theme-everon-mutms.path-admin-tool-mucatalog .catalogue-item,
+body.theme-everon-mutms.path-admin-tool-mucatalog .tool_mucatalog-item,
+body.theme-everon-mutms.path-admin-tool-muprog .program-card,
+body.theme-everon-mutms.path-admin-tool-mucertify .certification-card {
+    background-color: var(--bs-body-bg);
+    color: var(--bs-body-color);
+    border-color: var(--bs-border-color);
+}
+
+/* -------------------------------------------------------------------------
+ * Dashboard MuTMS blocks — match Everon surface tokens under colour modes
+ * ------------------------------------------------------------------------- */
+body.theme-everon-mutms .block_muprog_my,
+body.theme-everon-mutms .block_mucertify_my,
+body.theme-everon-mutms .block_muprogmyoverview {
+    background-color: transparent;
+}
+
+body.theme-everon-mutms .block_muprogmyoverview .block-cards {
+    border-top-color: var(--bs-border-color, #dee2e6);
+}
+
+body.theme-everon-mutms .block_muprogmyoverview .whitebutton .btn-secondary {
+    background: var(--bs-body-bg, #fff);
+    border-color: var(--bs-primary);
+    color: var(--bs-primary);
+}
+
+body.theme-everon-mutms .block_muprogmyoverview .program-card,
+body.theme-everon-mutms .block_muprogmyoverview .card {
+    background-color: var(--bs-body-bg);
+    color: var(--bs-body-color);
+    border-color: var(--bs-border-color);
+}
+
+/* -------------------------------------------------------------------------
+ * Boost dark mode — MuTMS plugin hard-coded light paints
+ * ------------------------------------------------------------------------- */
+:root[data-bs-theme="dark"] body.theme-everon-mutms .block_muprogmyoverview .whitebutton .btn-secondary {
+    background: var(--bs-body-bg);
+    color: var(--bs-primary);
+}
+
+:root[data-bs-theme="dark"] body.theme-everon-mutms .muform .muform-card {
+    background-color: var(--bs-body-bg);
+    border-color: var(--bs-border-color);
+}
+
+:root[data-bs-theme="dark"] body.theme-everon-mutms .muform .muform-card:hover {
+    background-color: var(--bs-secondary-bg);
+}
+
+:root[data-bs-theme="dark"] body.theme-everon-mutms .tool_murules-card,
+:root[data-bs-theme="dark"] body.theme-everon-mutms .tool_murules-overview {
+    background-color: var(--bs-body-bg);
+    color: var(--bs-body-color);
+    border-color: var(--bs-border-color);
+}
+
+:root[data-bs-theme="dark"] body.theme-everon-mutms.path-mod-mubook #region-main {
+    color: var(--bs-body-color);
+}

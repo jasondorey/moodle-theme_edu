@@ -444,7 +444,33 @@ function theme_everon_dashboard_should_offer(\moodle_page $page): bool {
     if (!theme_everon_dashboard_layout_enabled()) {
         return false;
     }
-    return $page->pagelayout === 'mydashboard';
+    if ($page->pagelayout !== 'mydashboard') {
+        return false;
+    }
+    // MuTMS custom home pages reuse mydashboard + content region — never skin as /my/.
+    if ($page->pagetype === 'tool-muhome-index') {
+        return false;
+    }
+    return true;
+}
+
+/**
+ * Whether MuTMS compatibility is enabled (admin setting).
+ * Default: disabled when the setting has never been saved.
+ *
+ * @return bool
+ */
+function theme_everon_mutms_compatibility_enabled(): bool {
+    return \theme_everon\local\mutms::is_enabled();
+}
+
+/**
+ * Admin setting updatedcallback for MuTMS compatibility.
+ *
+ * @return void
+ */
+function theme_everon_mutms_setting_updated(): void {
+    \theme_everon\local\mutms::setting_updated();
 }
 
 /**

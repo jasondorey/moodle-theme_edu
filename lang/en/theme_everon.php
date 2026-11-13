@@ -32,7 +32,7 @@ defined('MOODLE_INTERNAL') || die();
 $string['pluginname'] = 'Everon';
 $string['choosereadme'] = 'Everon is a Boost Union child theme for Project Theme. It ships stock Union look plus optional features such as the accessibility toolbar, Launch Pad, Focus Mode, My Courses layout, and Dashboard layout.';
 $string['configtitle'] = 'Everon';
-$string['settingsoverview_buc_desc'] = 'Everon is a Boost Union child for Project Theme. Prefer Union Look/Content settings; Everon adds features such as the accessibility toolbar, Launch Pad shortcuts, Focus Mode, My Courses card layout, and Dashboard layout.';
+$string['settingsoverview_buc_desc'] = 'Everon is a Boost Union child for Project Theme. Prefer Union Look/Content settings; Everon adds features such as the accessibility toolbar, Launch Pad shortcuts, Focus Mode, My Courses card layout, Dashboard layout, and optional MuTMS compatibility.';
 
 // Settings: General settings tab.
 // ... Section: Inheritance.
@@ -182,5 +182,12 @@ $string['enabledashboardlayout'] = 'Enable Dashboard layout';
 $string['enabledashboardlayout_desc'] = 'Widen the Dashboard page and apply the same Course overview card chrome as My Courses. Also unifies Timeline / Calendar / Upcoming block surfaces and softens empty states to match. Default: Yes. Enable Boost Union Outside (right) separately for the right column.';
 $string['dashboardsurfacesnote'] = 'When Dashboard layout is enabled, Everon also applies shared block surface tokens (soft border, radius, shadow) and calmer Timeline / Upcoming empty-state styling so supporting blocks match course cards.';
 
+// Settings: MuTMS tab.
+$string['mutmstab'] = 'MuTMS';
+$string['mutmsheading'] = 'MuTMS compatibility';
+$string['mutmsheading_desc'] = 'Optional bridge so Everon works with the MuTMS plugin suite on this site (programs, certifications, catalogue, custom home pages, multi-tenancy appearance, and related tools). Prefer theme CSS and settings mirroring — MuTMS plugin code is not forked.';
+$string['enablemutmscompatibility'] = 'Enable MuTMS compatibility';
+$string['enablemutmscompatibility_desc'] = 'When Yes: (1) load MuTMS surface CSS under Everon / Boost colour modes; (2) keep custom home pages (tool_muhome) out of the Dashboard layout skin; (3) mirror tenant Boost appearance (brand colour, SCSS, backgrounds) into Everon and bust per-tenant theme CSS caches. Default: No. Turn on after MuTMS plugins are installed.';
+
 // Privacy API.
-$string['privacy:metadata'] = 'The Everon theme does not store any personal data about any user. Accessibility and Focus Mode preferences are stored in the browser only. Launch Pad links, My Courses layout, My Courses stats, Dashboard layout, and compact navbar are site-wide admin settings.';
+$string['privacy:metadata'] = 'The Everon theme does not store any personal data about any user. Accessibility and Focus Mode preferences are stored in the browser only. Launch Pad links, My Courses layout, My Courses stats, Dashboard layout, compact navbar, and MuTMS compatibility are site-wide admin settings.';

@@ -6,6 +6,7 @@ Changes
 
 ### Rolling release
 
+* 2026-11-13 - MuTMS compatibility tab: enable/disable bridge for MuTMS plugins (surface CSS, muhome vs Dashboard skin, tenant Boost appearance mirrored into Everon + per-tenant CSS cache sentinel); default Off (v5.3-r18)
 * 2026-11-12 - Accessibility panel close: use Launch Pad `display:none` on `.collapsed` (stop pinning `height:auto` when closed) so Boost delayed fade cannot linger (v5.3-r17)
 * 2026-11-12 - Accessibility panel: hide immediately on close (override Boost delayed opacity/visibility while height stays auto) so caret and panel collapse together (v5.3-r16)
 * 2026-11-12 - User menu tiles panel: add "User menu" title above the tile grid to match Launch Pad / a11y section titles (v5.3-r15)

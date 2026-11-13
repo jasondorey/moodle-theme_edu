@@ -433,6 +433,33 @@ if ($hassiteconfig || has_capability('theme/boost_union:configure', context_syst
 
         $page->add($tab);
 
+        // MuTMS compatibility (tenant appearance bridge + plugin surface CSS).
+        $tab = new admin_settingpage(
+            'theme_everon_mutms',
+            get_string('mutmstab', 'theme_everon', null, true)
+        );
+
+        $name = 'theme_everon/mutmsheading';
+        $title = get_string('mutmsheading', 'theme_everon', null, true);
+        $description = get_string('mutmsheading_desc', 'theme_everon', null, true);
+        $setting = new admin_setting_heading($name, $title, $description);
+        $tab->add($setting);
+
+        $name = 'theme_everon/enablemutmscompatibility';
+        $title = get_string('enablemutmscompatibility', 'theme_everon', null, true);
+        $description = get_string('enablemutmscompatibility_desc', 'theme_everon', null, true);
+        $setting = new admin_setting_configselect(
+            $name,
+            $title,
+            $description,
+            THEME_BOOST_UNION_SETTING_SELECT_NO,
+            $yesnooption
+        );
+        $setting->set_updatedcallback('theme_everon_mutms_setting_updated');
+        $tab->add($setting);
+
+        $page->add($tab);
+
         // Add settings page to the admin settings category.
         $ADMIN->add('theme_boost_union', $page);
     }
